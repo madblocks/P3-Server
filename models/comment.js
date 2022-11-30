@@ -14,11 +14,30 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Comment.init({
-    userID: DataTypes.INTEGER,
-    activityID: DataTypes.INTEGER,
-    body: DataTypes.STRING,
-    liked_Events: DataTypes.ARRAY,
-    likes: DataTypes.INTEGER
+    userID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "User",
+        id: "id"
+      }
+    },
+    activityID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Activity",
+        id: "id"
+      }
+    },
+    body: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   }, {
     sequelize,
     modelName: 'Comment',

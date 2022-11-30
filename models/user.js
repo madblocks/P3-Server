@@ -14,15 +14,35 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     Attending: DataTypes.ARRAY,
     profile_Img: DataTypes.STRING,
     bio: DataTypes.STRING,
-    password: DataTypes.STRING,
+    passwordDigest: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     favorites: DataTypes.ARRAY,
-    email: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
+    },
+    phoneNumber: DataTypes.STRING,
+    likedEvents: {
+      type: DataTypes.ARRAY,
+      defaultValue: []
+    }
   }, {
     sequelize,
     modelName: 'User',

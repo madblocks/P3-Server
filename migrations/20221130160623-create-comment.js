@@ -10,19 +10,28 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userID: {
-        type: Sequelize.INTEGER
-      },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "User",
+        id: "id"
+      }
+    },
       activityID: {
-        type: Sequelize.INTEGER
-      },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Activity",
+        id: "id"
+      }
+    },
       body: {
-        type: Sequelize.STRING
-      },
-      liked_Events: {
-        type: Sequelize.ARRAY
+        type: Sequelize.STRING,
+        allowNull: false
       },
       likes: {
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
