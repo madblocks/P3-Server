@@ -10,28 +10,38 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       ownerID: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model:"User",
+          id:"id"
+        }
       },
       activity_type: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       cordinates: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false
       },
       city: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull:false 
       },
       state: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false 
       },
       descriptions: {
         type: Sequelize.STRING
       },
       reccuring: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: ""
       },
       createdAt: {
         allowNull: false,

@@ -14,14 +14,38 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Activity.init({
-    name: DataTypes.STRING,
-    ownerID:DataTypes.INTEGER,
-    activity_type: DataTypes.STRING,
-    cordinates: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
+    name: { 
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    ownerID:{
+     type: DataTypes.INTEGER,
+     references: {
+      model: "User",
+      id:"id"
+     }
+    },
+    activity_type: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    cordinates:{
+    type: DataTypes.STRING,
+    allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull:false
+    },
     descriptions: DataTypes.STRING,
-    reccuring: DataTypes.STRING
+    reccuring:{
+       type:DataTypes.STRING,
+      defaultValue: ""
+    },
   }, {
     sequelize,
     modelName: 'Activity',
