@@ -10,31 +10,48 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       firstName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       lastName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       Attending: {
-        type: Sequelize.ARRAY
+        type: Sequelize.ARRAY,
+        defaultValue: []
       },
       profile_Img: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: ""
       },
       bio: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: ""
       },
-      password: {
-        type: Sequelize.STRING
+      passwordDigest: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       favorites: {
-        type: Sequelize.ARRAY
+        type: Sequelize.ARRAY,
+        defaultValue: []
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: true
+        }
       },
       phoneNumber: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: ""
+      },
+      likedEvents: {
+        type: DataTypes.ARRAY,
+        defaultValue: []
       },
       createdAt: {
         allowNull: false,
