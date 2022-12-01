@@ -16,8 +16,8 @@ module.exports = {
       ownerID: {
         type: Sequelize.INTEGER,
         references: {
-          model:"User",
-          id:"id"
+          model: "User",
+          id: "id"
         }
       },
       activity_type: {
@@ -26,20 +26,20 @@ module.exports = {
       },
       cordinates: {
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull: false
       },
       city: {
         type: Sequelize.STRING,
-        allowNull:false 
+        allowNull: false 
       },
       state: {
         type: Sequelize.STRING,
         allowNull: false 
       },
-      descriptions: {
+      description: {
         type: Sequelize.STRING
       },
-      reccuring: {
+      recurring: {
         type: Sequelize.STRING,
         defaultValue: ""
       },
