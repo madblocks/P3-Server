@@ -17,7 +17,9 @@ module.exports = {
         id: "id"
       }
     },
+
       eventId: {
+
       type: Sequelize.UUID,
       allowNull: false,
       references: {
