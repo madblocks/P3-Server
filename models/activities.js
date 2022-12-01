@@ -1,25 +1,15 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Activity extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  Activity.init({
+const { DataTypes, Sequelize } = require('sequelize');
+
+//seqeulize define also returns model hence no return statement 
+const Activity = sequelize.define('Activity', {
     name: { 
       type: DataTypes.STRING,
       allowNull: false, 
     },
     ownerID:{
-     type: DataTypes.INTEGER,
+     type: Sequelize.UUID,
+     defaultValue: Sequelize.UUIDV4,
+     primaryKey: true,
      references: {
       model: "User",
       id:"id"
@@ -51,5 +41,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Activity',
     tableName:"activities"
   });
-  return Activity;
-};
+// write the associations here i guess 
+
