@@ -16,7 +16,6 @@ const EventTypes = sequelize.define('EventType', {
   })
   EventType.belongsTo(Event, {
     foreignKey:"Eventid",
-    as:"eventName"
   })
 
 };

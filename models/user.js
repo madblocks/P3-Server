@@ -50,30 +50,28 @@ module.exports = (sequelize) => {
     timestamps: true
   });
     User.hasMany(Comment, {
-    foreignKey:"Commentid",
-    as:"userComment"
+    foreignKey:"commentId",
     })
 
     User.hasMany(Event, {
       foreignKey:"ownerId",
-      as:"ownerId"
     })
 
     User.belongsToMany(Event, {
       through:"Attending",
-      foreignKey:"Eventid",
+      foreignKey:"EventId",
       as:"Attendee"
     })
     
     User.belongsToMany(Comment, {
       through:"CommentLikes",
-      foreignKey:"Commentid",
+      foreignKey:"CommentId",
       as:"commentLikes"
     })
     
     User.belongsToMany(Event, {
       through:"EventLikes",
-      foreignKey:"Eventid",
+      foreignKey:"eventId",
       as:"eventLike"
     })
 

@@ -48,29 +48,26 @@ module.exports = (sequelize) => {
     });
 // write the associations here i guess 
       Event.hasMany(Comment, {
-        foreignKey:"Commentid",
-        as:"eventComment"
+        foreignKey:"commentId",
       })
 
       Event.hasOne(EventType, {
         foreignKey:"EventTypename",
-        as:'eventName'
       })
 
       Event.belongsTo(User, {
-        foreignKey:"Userid",
-        as:"ownerId"
+        foreignKey:"userId",
       })
 
       Event.belongsToMany(User, {
         through:"Attending",
-        foreignKey:"Userid",
+        foreignKey:"userId",
         as:"Attendee"
       })
 
       Event.belongsToMany(User, {
         through:"EventLikes",
-        foreignKey:"Userid",
+        foreignKey:"userId",
         as:"eventLike"
       })
 }
