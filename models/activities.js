@@ -7,21 +7,21 @@ const Activity = sequelize.define('Activity', {
       allowNull: false, 
     },
     ownerID:{
-     type: Sequelize.UUID,
-     defaultValue: Sequelize.UUIDV4,
-     primaryKey: true,
-     references: {
-      model: "User",
-      id:"id"
-     }
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
+      primaryKey: true,
+      references: {
+        model: "User",
+        id: "id"
+      }
     },
     activity_type: {
-      type:DataTypes.STRING,
-      allowNull:false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     cordinates:{
-    type: DataTypes.STRING,
-    allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     city: {
       type: DataTypes.STRING,
@@ -29,11 +29,11 @@ const Activity = sequelize.define('Activity', {
     },
     state: {
       type: DataTypes.STRING,
-      allowNull:false
+      allowNull: false
     },
-    descriptions: DataTypes.STRING,
-    reccuring:{
-       type:DataTypes.STRING,
+    description: DataTypes.STRING,
+    recurring: {
+      type: DataTypes.STRING,
       defaultValue: ""
     },
   }, {
