@@ -10,10 +10,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
-      },
-      id: {
-        type: Sequelize.UUID
+        type: Sequelize.STRING,
+        allowNull: false
       },
       icon: {
         type: Sequelize.STRING

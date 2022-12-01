@@ -9,10 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      CommentId: {
+      commentId: {
         type: Sequelize.UUID
       },
-      LikeId: {
+      userId: {
         type: Sequelize.UUID
       },
       createdAt: {

@@ -1,12 +1,25 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+const { DataTypes } = require('sequelize')
+
+module.exports = (sequelize) => {
   const CommentLikes = sequelize.define('CommentLikes', {
-    commentId: DataTypes.UUID,
-    likeId: DataTypes.UUID
+    commentId: {
+      type: DataTypes.UUID,
+      references: {
+        model: 'Comment',
+        id: 'id'
+      },
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.UUID,
+      references: {
+        model: 'User',
+        id: 'id'
+      },
+      allowNull: false
+    }
   }, {
     tableName: 'commentLikes',
-  }
-  )};
+  })
+};
