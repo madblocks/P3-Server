@@ -1,6 +1,8 @@
+'use strict';
 const { DataTypes, Sequelize } = require('sequelize');
 
 //seqeulize define also returns model hence no return statement 
+module.exports = (sequelize) => {
 const Activity = sequelize.define('Activity', {
     name: { 
       type: DataTypes.STRING,
@@ -37,9 +39,8 @@ const Activity = sequelize.define('Activity', {
       defaultValue: ""
     },
   }, {
-    sequelize,
-    modelName: 'Activity',
-    tableName:"activities"
+    tableName:"activities" 
   });
 // write the associations here i guess 
 
+}
