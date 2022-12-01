@@ -1,8 +1,9 @@
 'use strict';
 const { DataTypes } = require('sequelize')
 
-module.exports = (sequelize, DataTypes) => {
-  const Attending = sequelize.define('Attending', {
+module.exports = (sequelize) => {
+  const EventLikes = sequelize.define('EventLikes', {
+   
     userId: {
       type: DataTypes.UUID,
       allowNull: false
@@ -12,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-    tableName: 'attending',
+    tableName: 'event_likes',
     timestamps: true
   });
 };
