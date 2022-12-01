@@ -8,7 +8,7 @@ const Event = sequelize.define('Event', {
       type: DataTypes.STRING,
       allowNull: false, 
     },
-    ownerID:{
+    ownerId:{
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
@@ -17,7 +17,7 @@ const Event = sequelize.define('Event', {
         id: "id"
       }
     },
-    activity_type: {
+    event_type: {
       type: DataTypes.STRING,
       allowNull: false
     },

@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       allowNull: false
     },
-    userID: {
+    userId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
         id: "id"
       }
     },
-    activityID: {
+    activityId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {

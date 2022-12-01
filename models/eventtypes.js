@@ -5,7 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
 const EventTypes = sequelize.define('EventType', {
     name: DataTypes.STRING,
-    id: DataTypes.UUID
+    id: DataTypes.UUID,
+    icon:DataTypes.STRING
   }, {
     tableName:'eventTypes'
   }

@@ -13,14 +13,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      ownerID: {
+      ownerId: {
         type: Sequelize.INTEGER,
         references: {
           model: "User",
           id: "id"
         }
       },
-      activity_type: {
+      event_type: {
         type: Sequelize.STRING,
         allowNull: false
       },

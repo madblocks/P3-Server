@@ -15,6 +15,9 @@ module.exports = {
       id: {
         type: Sequelize.UUID
       },
+      icon: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
