@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      profile_Img: {
+      profileImg: {
         type: Sequelize.STRING,
         defaultValue: ""
       },

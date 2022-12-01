@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       allowNull: false
     },
-    userID: {
+    userId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
@@ -18,11 +18,11 @@ module.exports = (sequelize) => {
         id: "id"
       }
     },
-    activityID: {
+    eventId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Activity",
+        model: "Event",
         id: "id"
       }
     },

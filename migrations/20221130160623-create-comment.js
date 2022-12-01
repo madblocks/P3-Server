@@ -9,7 +9,7 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
       },
-      userID: {
+      userId: {
       type: Sequelize.UUID,
       allowNull: false,
       references: {
@@ -17,11 +17,11 @@ module.exports = {
         id: "id"
       }
     },
-      activityID: {
+      eventId: {
       type: Sequelize.UUID,
       allowNull: false,
       references: {
-        model: "Activity",
+        model: "Event",
         id: "id"
       }
     },
