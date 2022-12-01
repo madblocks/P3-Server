@@ -5,12 +5,12 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const Attending = sequelize.define('Attending', {
-    userID: {
+    userId: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false
     },
-    activityID: {
+    activityId: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false

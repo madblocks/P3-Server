@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('activities', {
+    await queryInterface.createTable('events', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,14 +13,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      ownerID: {
+      ownerId: {
         type: Sequelize.INTEGER,
         references: {
           model: "User",
           id: "id"
         }
       },
-      activity_type: {
+      event_type: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -54,6 +54,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('activities');
+    await queryInterface.dropTable('events');
   }
 };
