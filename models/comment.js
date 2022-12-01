@@ -18,11 +18,11 @@ module.exports = (sequelize) => {
         id: "id"
       }
     },
-    activityId: {
+    eventId: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Activity",
+        model: "Event",
         id: "id"
       }
     },

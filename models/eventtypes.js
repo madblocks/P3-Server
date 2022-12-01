@@ -4,9 +4,14 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
 const EventTypes = sequelize.define('EventType', {
-    name: DataTypes.STRING,
-    id: DataTypes.UUID,
-    icon:DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    icon: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     tableName:'eventTypes'
   }

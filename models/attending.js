@@ -1,19 +1,23 @@
 'use strict';
 const { DataTypes } = require('sequelize')
-const {
-  Model
-} = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   const Attending = sequelize.define('Attending', {
     userId: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'User',
+        id: 'id'
+      }
     },
-    activityId: {
+    eventId: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'Event',
+        id: 'id'
+      }
     }
   }, {
     tableName: 'attending',
