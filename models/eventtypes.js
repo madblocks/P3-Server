@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 const EventTypes = sequelize.define('EventType', {
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     icon: {
       type: DataTypes.STRING,
@@ -15,8 +15,7 @@ const EventTypes = sequelize.define('EventType', {
     tableName:'eventTypes'
   })
   EventType.belongsTo(Event, {
-    foreignKey:"Eventid",
-    as:"eventName"
+    foreignKey:"eventTypeId",
   })
 
 };

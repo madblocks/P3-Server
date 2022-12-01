@@ -35,18 +35,16 @@ module.exports = (sequelize) => {
     timestamps: true
   });
   Comment.belongsTo(User, {
-    foreignKey:"Userid",
-    as:"userComment"
+    foreignKey:"userId",
   })
 
   Comment.belongsTo(Event, {
-    foreignKey:"Eventid",
-    as:"eventComment"
+    foreignKey:"eventId",
   })
 
   Comment.belongsToMany(User, {
     through:"CommentLikes",
-    foreignKey:"Userid",
-    as:'commentLikes'
+    foreignKey:"userId",
+    as:'commentsLiked'
   })
 };
