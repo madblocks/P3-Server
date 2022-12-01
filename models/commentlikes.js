@@ -4,8 +4,8 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
 const CommentLikes = sequelize.define('CommentLikes', {
-    commentId: DataTypes.UUID,
-    likeId: DataTypes.UUID
+      commentId: DataTypes.UUID,
+      userId: DataTypes.UUID
   }, {
     tableName: 'commentLikes',
   }

@@ -34,4 +34,19 @@ module.exports = (sequelize) => {
     tableName: 'comments',
     timestamps: true
   });
+  Comment.belongsTo(User, {
+    foreignKey:"Userid",
+    as:"userComment"
+  })
+
+  Comment.belongsTo(Event, {
+    foreignKey:"Eventid",
+    as:"eventComment"
+  })
+
+  Comment.belongsToMany(User, {
+    through:"CommentLikes",
+    foreignKey:"Userid",
+    as:'commentLikes'
+  })
 };

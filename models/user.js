@@ -1,4 +1,5 @@
 'use strict';
+const { useAsyncError } = require('react-router-dom');
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
@@ -7,6 +8,11 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+      allowNull: false
+    },
+    username: {
+      type: DataTypes.STRING,
+      unique: true,
       allowNull: false
     },
     firstName: {
@@ -43,4 +49,36 @@ module.exports = (sequelize) => {
     tableName: 'users',
     timestamps: true
   });
+    User.hasMany(Comment, {
+    foreignKey:"Commentid",
+    as:"userComment"
+    })
+
+    User.hasMany(Event, {
+      foreignKey:"ownerId",
+      as:"ownerId"
+    })
+
+    User.belongsToMany(Event, {
+      through:"Attending",
+      foreignKey:"Eventid",
+      as:"Attendee"
+    })
+    
+    User.belongsToMany(Comment, {
+      through:"CommentLikes",
+      foreignKey:"Commentid",
+      as:"commentLikes"
+    })
+    
+    User.belongsToMany(Event, {
+      through:"EventLikes",
+      foreignKey:"Eventid",
+      as:"eventLike"
+    })
+
+    //stole this code from the video idk if it works as it should 
+    User.belongsToMany(User, {as:"User", foreignKey:"Userid", through:"follow"})
+
+    User.belongsToMany(User, {as:"Followed", foreignKey:"Followedid", through:"follow"})
 };

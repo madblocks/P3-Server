@@ -16,7 +16,6 @@ module.exports = (sequelize) => {
       },
       ownerId:{
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         references: {
           model: "User",
@@ -48,5 +47,30 @@ module.exports = (sequelize) => {
       tableName: "events" 
     });
 // write the associations here i guess 
+      Event.hasMany(Comment, {
+        foreignKey:"Commentid",
+        as:"eventComment"
+      })
 
+      Event.hasOne(EventType, {
+        foreignKey:"EventTypename",
+        as:'eventName'
+      })
+
+      Event.belongsTo(User, {
+        foreignKey:"Userid",
+        as:"ownerId"
+      })
+
+      Event.belongsToMany(User, {
+        through:"Attending",
+        foreignKey:"Userid",
+        as:"Attendee"
+      })
+
+      Event.belongsToMany(User, {
+        through:"EventLikes",
+        foreignKey:"Userid",
+        as:"eventLike"
+      })
 }
