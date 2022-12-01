@@ -6,11 +6,19 @@ module.exports = (sequelize) => {
    
     userId: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'User',
+        id: 'id'
+      }
     },
     eventId: {
       type: DataTypes.UUID,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'User',
+        id: 'id'
+      }
     }
   }, {
     tableName: 'event_likes',
