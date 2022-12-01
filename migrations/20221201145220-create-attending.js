@@ -14,7 +14,7 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
       },
-      activityId: {
+      eventId: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false

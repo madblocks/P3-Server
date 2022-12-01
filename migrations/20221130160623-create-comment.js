@@ -17,7 +17,7 @@ module.exports = {
         id: "id"
       }
     },
-      activityId: {
+      eventId: {
       type: Sequelize.UUID,
       allowNull: false,
       references: {
