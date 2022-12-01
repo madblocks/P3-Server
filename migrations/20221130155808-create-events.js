@@ -1,4 +1,7 @@
 'use strict';
+
+
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -14,9 +17,9 @@ module.exports = {
         allowNull: false
       },
       ownerId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
-          model: "User",
+          model: User,
           id: "id"
         }
       },
