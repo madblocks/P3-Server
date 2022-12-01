@@ -18,13 +18,17 @@ module.exports = (sequelize) => {
         type: Sequelize.UUID,
         primaryKey: true,
         references: {
-          model: "User",
+          model: User,
           id: "id"
         }
       },
-      event_type: {
+      eventTypeId: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        references:{
+          model:EventType,
+          key:'id'        
+      }
       },
       cordinates:{
         type: DataTypes.STRING,
@@ -47,27 +51,28 @@ module.exports = (sequelize) => {
       tableName: "events" 
     });
 // write the associations here i guess 
+
       Event.hasMany(Comment, {
         foreignKey:"commentId",
       })
 
       Event.hasOne(EventType, {
-        foreignKey:"EventTypename",
+        foreignKey:"name",
       })
 
       Event.belongsTo(User, {
-        foreignKey:"userId",
+        foreignKey:"ownerId",
       })
 
       Event.belongsToMany(User, {
         through:"Attending",
         foreignKey:"userId",
-        as:"Attendee"
+        as:"Attendees"
       })
 
       Event.belongsToMany(User, {
         through:"EventLikes",
         foreignKey:"userId",
-        as:"eventLike"
+        as:"eventLiked"
       })
 }
