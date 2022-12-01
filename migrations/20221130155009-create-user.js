@@ -4,10 +4,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('users', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
       },
       firstName: {
         type: Sequelize.STRING,
@@ -16,10 +16,6 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
         allowNull: false
-      },
-      Attending: {
-        type: Sequelize.ARRAY,
-        defaultValue: []
       },
       profile_Img: {
         type: Sequelize.STRING,
@@ -48,10 +44,6 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.STRING,
         defaultValue: ""
-      },
-      likedEvents: {
-        type: DataTypes.ARRAY,
-        defaultValue: []
       },
       createdAt: {
         allowNull: false,

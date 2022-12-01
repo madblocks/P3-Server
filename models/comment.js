@@ -1,21 +1,17 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Comment extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  Comment.init({
+const { DataTypes } = require('sequelize')
+
+module.exports = (sequelize) => {
+  const Comment = sequelize.define('Comment', {
+
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false
+    },
     userID: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "User",
@@ -23,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     activityID: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       references: {
         model: "Activity",
@@ -34,13 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    likes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
-    }
   }, {
-    sequelize,
-    modelName: 'Comment',
+    tableName: 'comments',
+    timestamps: true
   });
-  return Comment;
 };
