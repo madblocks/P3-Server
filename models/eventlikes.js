@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       }
     }
   }, {
-    tableName: 'event_likes',
+    tableName: 'eventLikes',
     timestamps: true
   });
 };

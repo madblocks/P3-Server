@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const {DataTypes} = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
 const EventTypes = sequelize.define('EventType', {
     name: {
@@ -14,5 +13,10 @@ const EventTypes = sequelize.define('EventType', {
     }
   }, {
     tableName:'eventTypes'
-  }
-  )};
+  })
+  EventType.belongsTo(Event, {
+    foreignKey:"Eventid",
+    as:"eventName"
+  })
+
+};

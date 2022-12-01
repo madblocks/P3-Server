@@ -9,20 +9,20 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         allowNull: false
       },
-      userId: { 
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "User",
-          id: "id"
-        }
-      },
+      userId: {
+      type: Sequelize.UUID,
+      allowNull: false,
+      references: {
+        model: "User",
+        id: "id"
+      }
+    },
       eventId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "Event",
-          id: "id"
+      type: Sequelize.UUID,
+      allowNull: false,
+      references: {
+        model: "Event",
+        id: "id"
       }
       },
       body: {
