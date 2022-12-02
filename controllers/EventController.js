@@ -1,10 +1,67 @@
 const { User, Event, Comment, Activity } = require('../models')
 
-// needs query string implemented
-// url: /api/event
-const FindEvents = async (req, res) => {
+// url: /api/event/
+const FindEventsByDateAsc = async (req, res) => {
   try {
-    const result = await Event.findAll()
+    const result = await Event.findAll({
+      order: [['date', 'ASC']],
+      attributes: [ 'name',
+                    'date',
+                    'city',
+                    'state',
+                    'longitude',
+                    'latitude',
+                    'recurring',
+                    'description'
+      ],
+      include: [{
+        model: User,
+        as: "user",
+        attributes: ["username"]
+      }]
+  })
+    res.send(result)
+  } catch (error) {
+    throw error
+  }
+}
+
+//url /api/event/:name
+const GetEventByActivity = async (req, res) => {
+  try {
+    const result = await Event.findAll({
+      order: [["date", "ASC"]],
+      where : {name: req.params.name },
+      attributes:[ 'name',
+                   'date',
+                   'city',
+                   'state',
+                   'recurring',
+                   'description'
+      ],
+      include: [{
+          model: User,
+          as:'user',
+          attributes:["username"]
+      }]
+    })
+    res.send(result)
+  } catch(error) {
+    throw error 
+  }
+}
+
+//url /api/event/:username
+
+const GetEventByUser = async (req, res) => {
+  try{
+    const result = await Event.findAll({
+      order : [["date", 'ASC']],
+      where : {userId : req.params.userId},
+      attributes : [ 'name'
+
+      ]
+    })
     res.send(result)
   } catch (error) {
     throw error
@@ -73,7 +130,9 @@ const DeleteEvent = async (req, res) => {
 }
 
 module.exports = {
-  FindEvents,
+  FindEventsByDateAsc,
+  GetEventByActivity,
+  GetEventByUser,
   GetEvent,
   CreateEvent,
   UpdateEvent,
