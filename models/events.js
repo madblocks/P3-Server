@@ -1,5 +1,6 @@
 'use strict';
 const { DataTypes, Sequelize } = require('sequelize');
+const User = sequelize.define('User', {id: DataTypes.UUID})
 
 //seqeulize define also returns model hence no return statement 
 module.exports = (sequelize) => {
@@ -18,7 +19,7 @@ module.exports = (sequelize) => {
         type: Sequelize.UUID,
         primaryKey: true,
         references: {
-          model: User,
+          model: 'User',
           id: "id"
         }
       },
@@ -48,7 +49,7 @@ module.exports = (sequelize) => {
         defaultValue: ""
       },
     }, {
-      tableName: "events" 
+      tableName: "events",
     });
 // write the associations here i guess 
 
