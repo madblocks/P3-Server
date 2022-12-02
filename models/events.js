@@ -1,6 +1,5 @@
 'use strict';
-const { DataTypes, Sequelize } = require('sequelize');
-const User = sequelize.define('User', {id: DataTypes.UUID})
+const { DataTypes } = require('sequelize');
 
 //seqeulize define also returns model hence no return statement 
 module.exports = (sequelize) => {
