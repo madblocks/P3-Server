@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         type: Sequelize.UUID,
         primaryKey: true,
         references: {
-          model: User,
+          model: 'User',
           id: "id"
         }
       },

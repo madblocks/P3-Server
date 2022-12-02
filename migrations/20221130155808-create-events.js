@@ -1,8 +1,8 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('events', {
+   up : (queryInterface, Sequelize) => {
+    return queryInterface.createTable('events', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -16,7 +16,9 @@ module.exports = {
       ownerId: {
         type: Sequelize.UUID,
         references: {
-          model: Sequelize.User,
+          model: {
+            tableName: 'users',
+          },
           id: "id"
         }
       },
@@ -53,7 +55,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('events');
+   down : (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('events');
   }
 };
