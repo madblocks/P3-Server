@@ -1,8 +1,8 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-   up : (queryInterface, Sequelize) => {
-    return queryInterface.createTable('event_likes', {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('eventLikes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,11 +11,19 @@ module.exports = {
       },
       userId: {
         type: Sequelize.UUID,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'users',
+          id: 'id'
+        }
       },
       eventId: {
         type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: 'events',
+          id: 'id'
+      }
       },
       createdAt: {
         allowNull: false,

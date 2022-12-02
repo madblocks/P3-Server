@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "User",
+        model: "users",
         id: "id"
       }
     },
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
-        model: "Event",
+        model: "events",
         id: "id"
       }
     },
@@ -34,17 +34,16 @@ module.exports = (sequelize) => {
     tableName: 'comments',
     timestamps: true
   });
-  Comment.belongsTo(User, {
-    foreignKey:"userId",
-  })
+  Comment.associate = function(models) {
+    Comment.belongsTo(models.User)
 
-  Comment.belongsTo(Event, {
-    foreignKey:"eventId",
-  })
+    Comment.belongsTo(models.Event)
 
-  Comment.belongsToMany(User, {
-    through:"CommentLikes",
-    foreignKey:"userId",
-    as:'commentsLiked'
-  })
+    Comment.belongsToMany(models.User, {
+      through: "CommentLikes",
+      foreignKey: "userId",
+      as: "commentsLiked"
+    })
+  }
+  return Comment
 };

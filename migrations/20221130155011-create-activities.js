@@ -2,11 +2,11 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
    up : (queryInterface, Sequelize) =>  {
-    return queryInterface.createTable('eventTypes', {
+    return queryInterface.createTable('activities', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER
       },
       name: {
@@ -27,6 +27,6 @@ module.exports = {
     });
   },
    down : (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('eventTypes');
+    return queryInterface.dropTable('activities');
   }
 };
