@@ -49,6 +49,17 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },
+        {
+          username: 'xXKingJeremyXx',
+          firstName: 'Jeremy',
+          lastName: 'Taubman',
+          profileImg: 'placeholder',
+          bio: 'placeholder',
+          passwordDigest: 'placeholder',
+          email: 'kingJT@fake.com',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ]
     )
   },
