@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: Sequelize.literal('gen_random_uuid()'),
       },
       name: {
         type: Sequelize.STRING,
@@ -28,6 +28,10 @@ module.exports = {
           id: 'id'
         }
       },
+      date: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
       longitude: {
         type: Sequelize.FLOAT,
         allowNull: false
@@ -45,7 +49,7 @@ module.exports = {
         allowNull: false 
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       recurring: {
         type: Sequelize.STRING,

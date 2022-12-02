@@ -14,11 +14,12 @@ module.exports = {
         allowNull: false,
       },
       icon: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'placeholder'
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,

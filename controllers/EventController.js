@@ -1,6 +1,7 @@
-const { User, Event, Comment } = require('../models')
+const { User, Event, Comment, Activity } = require('../models')
 
 // needs query string implemented
+// url: /api/event
 const FindEvents = async (req, res) => {
   try {
     const result = await Event.findAll()
@@ -10,10 +11,21 @@ const FindEvents = async (req, res) => {
   }
 }
 
+// url: /api/event/:eventId
 const GetEvent = async (req, res) => {
   try {
+    //console.log(req.params)
     const result = await Event.findAll({
-      where : {id: req.params.eventId}
+      where: {id: req.params.eventId},
+      include: [{
+        model: Activity,
+        as: 'activity',
+        attributes: ['name']
+      },{
+        model: User,
+        as: 'user',
+        attributes: ['username']
+      }]
     })
     res.send(result)
   } catch (error) {
@@ -21,6 +33,7 @@ const GetEvent = async (req, res) => {
   }
 }
 
+// url: /api/event/:eventId
 const CreateEvent = async (req, res) => {
   try {
     const event = await Event.create(req.body)
@@ -30,6 +43,7 @@ const CreateEvent = async (req, res) => {
   }
 }
 
+// url: /api/event/:eventId
 const UpdateEvent = async (req, res) => {
   try {
     const updatedEvent = await Event.update(
@@ -45,6 +59,7 @@ const UpdateEvent = async (req, res) => {
   }
 }
 
+// url: /api/event/:eventId
 const DeleteEvent = async (req, res) => {
   try {
     const deletedEvent = await Event.destroy({

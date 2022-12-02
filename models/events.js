@@ -30,6 +30,9 @@ module.exports = (sequelize) => {
         key:'id'        
       }
     },
+    date: {
+      type: DataTypes.DATE
+    },
     longitude: {
       type: DataTypes.FLOAT,
       allowNull: false
@@ -46,7 +49,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
     recurring: {
       type: DataTypes.STRING,
       defaultValue: ""
@@ -57,17 +60,22 @@ module.exports = (sequelize) => {
   Event.associate = function(model) {
 
     Event.hasMany(model.Comment, {
-      foreignKey:"commentId",
+      foreignKey: "commentId",
+      as: 'comments'
     })
 
-    Event.belongsTo(model.Activity)
+    Event.belongsTo(model.Activity, {
+      as: 'activity'
+    })
 
-    Event.belongsTo(model.User)
+    Event.belongsTo(model.User, {
+      as: 'user'
+    })
 
     Event.belongsToMany(model.User, {
       through: "Attending",
       foreignKey: "userId",
-      as: "Attendees"
+      as: "attendees"
     })
 
     Event.belongsToMany(model.User, {

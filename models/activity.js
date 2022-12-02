@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     icon: {
       type: DataTypes.STRING,
-      allowNull: false
+      defaultValue: 'placeholder'
     }
   }, {
     tableName:'activities'
@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   Activity.associate = function(models) {
     Activity.hasOne(models.Event, {
       foreignKey:"activityId",
+      as: 'event'
     })
   }
   return Activity
