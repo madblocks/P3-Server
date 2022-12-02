@@ -1,1 +1,38 @@
-create a
+
+1. Database Config Setup
+- Create 'config' folder in the root of the project and config.json within /config.
+- Add your database settings. (Note: this may differ between users)
+ - E.g.
+  {
+    "development": {
+      "database": "outdoorsy_dev",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    },
+    "test": {
+      "database": "outdoorsy_test",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    },
+    "production": {
+      "database": "outdoorsy_production",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    }
+  }
+
+- Alternatively you can run 'sequelize init' which should create the /config/config.json folder then error out
+  > Created "config/config.json"
+  - edit the config.json accordingly
+
+2. Migrate the database
+  > sequelize db:migrate
+
+3. Seed database
+  > sequelize db:seed:all
+
+
+Recreate database
+  - If theres any issues or has been updated undo the migrations and reseed.
+  > sequelize db:migrate:undo:all
+  - Then repeat steps 2 and 3 above.
