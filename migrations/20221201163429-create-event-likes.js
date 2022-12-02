@@ -35,7 +35,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('eventLikes');
+   down : (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('eventLikes');
   }
 };

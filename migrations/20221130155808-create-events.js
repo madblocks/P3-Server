@@ -1,8 +1,8 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('events', {
+   up : (queryInterface, Sequelize) => {
+    return queryInterface.createTable('events', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -15,12 +15,16 @@ module.exports = {
       },
       userId: {
         type: Sequelize.UUID,
+        references: {
+          model: 'users',
+          id: 'id'
+        }
       },
-      eventTypeId: {
+      activityId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'eventTypes',
+          model: 'activities',
           id: 'id'
         }
       },
@@ -57,7 +61,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('events');
+   down : (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('events');
   }
 };
