@@ -73,24 +73,6 @@ const GetEventByUserId = async (req, res) => {
   }
 }
 
-//url /api/event/:activityId
-//not functioning returns []
-//will return later - JV
-const GetEventByActivityID = async (req, res) => {
-try {
-  const result = await Event.findAll({
-    where: {activityId: req.params.activityId},
-    attributes: [ 'name'
-
-    ]
-  })
-  
-    res.send(result)
-  } catch(error) {
-    throw error 
-  }
-}
-
 // url: /api/event/:eventId
 const GetEvent = async (req, res) => {
   try {
