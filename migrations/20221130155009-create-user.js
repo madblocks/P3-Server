@@ -35,7 +35,7 @@ module.exports = {
         allowNull: false
       },
       favorites: {
-        type: Sequelize.ARRAY(Sequelize.Sequelize.INTEGER),
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
         defaultValue: []
       },
       email: {
