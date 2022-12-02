@@ -2,7 +2,7 @@
 const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  const EventType = sequelize.define('EventType', {
+  const Activity = sequelize.define('Activity', {
     id: {
       allowNull: false,
       primaryKey: true,
@@ -18,12 +18,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-    tableName:'eventTypes'
+    tableName:'activities'
   })
-  EventType.associate = function(models) {
-    EventType.hasOne(models.Event, {
-      foreignKey:"eventTypeId",
+  Activity.associate = function(models) {
+    Activity.hasOne(models.Event, {
+      foreignKey:"activityId",
     })
   }
-  return EventType
+  return Activity
 };

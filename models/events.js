@@ -22,11 +22,11 @@ module.exports = (sequelize) => {
         id: "id"
       }
     },
-    eventTypeId: {
+    activityId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'eventTypes',
+        model: 'activities',
         key:'id'        
       }
     },
@@ -60,7 +60,7 @@ module.exports = (sequelize) => {
       foreignKey:"commentId",
     })
 
-    Event.belongsTo(model.EventType)
+    Event.belongsTo(model.Activity)
 
     Event.belongsTo(model.User)
 
