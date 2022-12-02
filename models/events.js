@@ -49,7 +49,7 @@ module.exports = (sequelize) => {
         defaultValue: ""
       },
     }, {
-      tableName: "events" 
+      tableName: "events",
     });
 // write the associations here i guess 
 
