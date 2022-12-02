@@ -5,74 +5,75 @@ const { DataTypes, Sequelize } = require('sequelize');
 module.exports = (sequelize) => {
   const Event = sequelize.define('Event', {
     id: {
-          allowNull: false,
-          primaryKey: true,
-          type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4
-        },
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
     name: { 
-        type: DataTypes.STRING,
-        allowNull: false, 
-      },
-      ownerId:{
-        type: Sequelize.UUID,
-        primaryKey: true,
-        references: {
-          model: User,
-          id: "id"
-        }
-      },
-      eventTypeId: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        references:{
-          model:EventType,
-          key:'id'        
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    userId:{
+      type: DataTypes.UUID,
+      primaryKey: true,
+      references: {
+        model: 'users',
+        id: "id"
       }
-      },
-      cordinates:{
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      city: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      state: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      description: DataTypes.STRING,
-      recurring: {
-        type: DataTypes.STRING,
-        defaultValue: ""
-      },
-    }, {
-      tableName: "events" 
-    });
-// write the associations here i guess 
+    },
+    eventTypeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'eventTypes',
+        key:'id'        
+      }
+    },
+    longitude: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    latitude: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: DataTypes.STRING,
+    recurring: {
+      type: DataTypes.STRING,
+      defaultValue: ""
+    }
+  }, {
+    tableName: "events" 
+  });
+  Event.associate = function(model) {
 
-      Event.hasMany(Comment, {
-        foreignKey:"commentId",
-      })
+    Event.hasMany(model.Comment, {
+      foreignKey:"commentId",
+    })
 
-      Event.hasOne(EventType, {
-        foreignKey:"name",
-      })
+    Event.belongsTo(model.EventType)
 
-      Event.belongsTo(User, {
-        foreignKey:"ownerId",
-      })
+    Event.belongsTo(model.User)
 
-      Event.belongsToMany(User, {
-        through:"Attending",
-        foreignKey:"userId",
-        as:"Attendees"
-      })
+    Event.belongsToMany(model.User, {
+      through: "Attending",
+      foreignKey: "userId",
+      as: "Attendees"
+    })
 
-      Event.belongsToMany(User, {
-        through:"EventLikes",
-        foreignKey:"userId",
-        as:"eventLiked"
-      })
+    Event.belongsToMany(model.User, {
+      through: "EventLikes",
+      foreignKey: "userId",
+      as: "eventLiked"
+    })
+  }
 }

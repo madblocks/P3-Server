@@ -1,5 +1,5 @@
 'use strict';
-const { useAsyncError } = require('react-router-dom');
+
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    favorites: DataTypes.ARRAY,
+    favorites: DataTypes.ARRAY(DataTypes.INTEGER),
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -49,34 +49,39 @@ module.exports = (sequelize) => {
     tableName: 'users',
     timestamps: true
   });
-    User.hasMany(Comment, {
-    foreignKey:"userId",
+  User.associate = function(models) {
+    //associations can be defined here
+    User.hasMany(models.Comment, {
+      foreignKey: "userId",
     })
 
-    User.hasMany(Event, {
-      foreignKey:"ownerId",
+    User.hasMany(models.Event, {
+      foreignKey: "userId",
     })
 
-    User.belongsToMany(Event, {
-      through:"Attending",
-      foreignKey:"eventId",
-      as:"attendedEvents"
+    User.belongsToMany(models.Event, {
+      through: "Attending",
+      foreignKey: "eventId",
+      as: "attendedEvents"
     })
     
-    User.belongsToMany(Comment, {
-      through:"CommentLikes",
-      foreignKey:"userId",
-      as:"likedComment"
+    User.belongsToMany(models.Comment, {
+      through: "CommentLikes",
+      foreignKey: "userId",
+      as: "likedComment"
     })
     
-    User.belongsToMany(Event, {
-      through:"EventLikes",
-      foreignKey:"eventId",
-      as:"likedEvent"
+    User.belongsToMany(models.Event, {
+      through: "EventLikes",
+      foreignKey: "eventId",
+      as: "likedEvent"
     })
-
+  
     //stole this code from the video idk if it works as it should 
-    User.belongsToMany(User, {as:"User", foreignKey:"Userid", through:"follow"})
+    // holding off on this until we get it basic posts working.  We'll need to create the follow table since we aren't 
+    // using sync() and maybe add the followedId
+    // User.belongsToMany(models.User, {as: "User", foreignKey: "Userid", through: "follow"})
 
-    User.belongsToMany(User, {as:"Followed", foreignKey:"Followedid", through:"follow"})
+    // User.belongsToMany(models.User, {as: "Followed", foreignKey: "Followedid", through: "follow"})
+  }
 };

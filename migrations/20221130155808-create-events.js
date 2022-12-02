@@ -13,19 +13,23 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      ownerId: {
+      userId: {
+        type: Sequelize.UUID,
+      },
+      eventTypeId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: "User",
-          id: "id"
+          model: 'eventTypes',
+          id: 'id'
         }
       },
-      event_type: {
-        type: Sequelize.STRING,
+      longitude: {
+        type: Sequelize.FLOAT,
         allowNull: false
       },
-      cordinates: {
-        type: Sequelize.STRING,
+      latitude: {
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       city: {

@@ -10,10 +10,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       commentId: {
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        references: {
+          model: 'comments',
+          id: 'id'
+        }
       },
       userId: {
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        references: {
+          model: 'users',
+          id: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

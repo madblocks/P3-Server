@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('event_likes', {
+    await queryInterface.createTable('eventLikes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,11 +11,19 @@ module.exports = {
       },
       userId: {
         type: Sequelize.UUID,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'users',
+          id: 'id'
+        }
       },
       eventId: {
         type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: 'events',
+          id: 'id'
+      }
       },
       createdAt: {
         allowNull: false,
