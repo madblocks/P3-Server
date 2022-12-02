@@ -1,10 +1,72 @@
 const { User, Event, Comment, Activity } = require('../models')
 
-// needs query string implemented
 // url: /api/event
-const FindEvents = async (req, res) => {
+//works tested
+const FindEventsByDateAsc = async (req, res) => {
   try {
-    const result = await Event.findAll()
+    const result = await Event.findAll({
+      order: [['date', 'ASC']],
+      attributes: [ 'name',
+                    'date',
+                    'city',
+                    'state',
+                    'longitude',
+                    'latitude',
+                    'recurring',
+                    'description'
+      ],
+      include: [{
+        model: User,
+        as: "user",
+        attributes: ["username"]
+      }]
+  })
+    res.send(result)
+  } catch (error) {
+    throw error
+  }
+}
+
+//url /api/event/:name
+//works tested 
+const GetEventByActivity = async (req, res) => {
+  try {
+    const result = await Event.findAll({
+      order: [["date", "ASC"]],
+      where : {name: req.params.name },
+      attributes:[ 'name',
+                   'date',
+                   'city',
+                   'state',
+                   'longitude',
+                   'latitude',
+                   'recurring',
+                   'description'
+      ],
+      include: [{
+          model: User,
+          as:'user',
+          attributes:["username"]
+      }]
+    })
+    res.send(result)
+  } catch(error) {
+    throw error 
+  }
+}
+
+//url /api/event/:username
+//not functioning returns []
+//will return to later -JV 
+const GetEventByUserId = async (req, res) => {
+  try{
+    const result = await Event.findAll({
+      order : [["date", 'ASC']],
+      where : {userId : req.params.userId},
+      attributes : [ 'name'
+
+      ]
+    })
     res.send(result)
   } catch (error) {
     throw error
@@ -73,7 +135,10 @@ const DeleteEvent = async (req, res) => {
 }
 
 module.exports = {
-  FindEvents,
+  FindEventsByDateAsc,
+  GetEventByActivity,
+  GetEventByActivityID,
+  GetEventByUserId,
   GetEvent,
   CreateEvent,
   UpdateEvent,

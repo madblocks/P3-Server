@@ -1,7 +1,6 @@
 'use strict';
 const { DataTypes } = require('sequelize');
 
-//seqeulize define also returns model hence no return statement 
 module.exports = (sequelize) => {
   const Event = sequelize.define('Event', {
     id: {
