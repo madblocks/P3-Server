@@ -1,6 +1,7 @@
 const { User, Event, Comment, Activity } = require('../models')
 
-// url: /api/event/
+// url: /api/event
+//works tested
 const FindEventsByDateAsc = async (req, res) => {
   try {
     const result = await Event.findAll({
@@ -27,6 +28,7 @@ const FindEventsByDateAsc = async (req, res) => {
 }
 
 //url /api/event/:name
+//works tested 
 const GetEventByActivity = async (req, res) => {
   try {
     const result = await Event.findAll({
@@ -36,6 +38,8 @@ const GetEventByActivity = async (req, res) => {
                    'date',
                    'city',
                    'state',
+                   'longitude',
+                   'latitude',
                    'recurring',
                    'description'
       ],
@@ -52,8 +56,9 @@ const GetEventByActivity = async (req, res) => {
 }
 
 //url /api/event/:username
-
-const GetEventByUser = async (req, res) => {
+//not functioning returns []
+//will return to later -JV 
+const GetEventByUserId = async (req, res) => {
   try{
     const result = await Event.findAll({
       order : [["date", 'ASC']],
@@ -65,6 +70,24 @@ const GetEventByUser = async (req, res) => {
     res.send(result)
   } catch (error) {
     throw error
+  }
+}
+
+//url /api/event/:activityId
+//not functioning returns []
+//will return later - JV
+const GetEventByActivityID = async (req, res) => {
+try {
+  const result = await Event.findAll({
+    where: {activityId: req.params.activityId},
+    attributes: [ 'name'
+
+    ]
+  })
+  
+    res.send(result)
+  } catch(error) {
+    throw error 
   }
 }
 
@@ -132,7 +155,8 @@ const DeleteEvent = async (req, res) => {
 module.exports = {
   FindEventsByDateAsc,
   GetEventByActivity,
-  GetEventByUser,
+  GetEventByActivityID,
+  GetEventByUserId,
   GetEvent,
   CreateEvent,
   UpdateEvent,
