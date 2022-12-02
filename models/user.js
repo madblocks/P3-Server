@@ -53,10 +53,12 @@ module.exports = (sequelize) => {
     //associations can be defined here
     User.hasMany(models.Comment, {
       foreignKey: "userId",
+      as: 'comments'
     })
 
     User.hasMany(models.Event, {
       foreignKey: "userId",
+      as: 'events'
     })
 
     User.belongsToMany(models.Event, {

@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       }
     },
     body: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
   }, {
@@ -35,9 +35,13 @@ module.exports = (sequelize) => {
     timestamps: true
   });
   Comment.associate = function(models) {
-    Comment.belongsTo(models.User)
+    Comment.belongsTo(models.User, {
+      as: 'user'
+    })
 
-    Comment.belongsTo(models.Event)
+    Comment.belongsTo(models.Event, {
+      as: 'event'
+    })
 
     Comment.belongsToMany(models.User, {
       through: "CommentLikes",
