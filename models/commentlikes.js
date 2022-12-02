@@ -21,4 +21,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'commentLikes',
   }
-)};
+  )
+  return CommentLikes
+};

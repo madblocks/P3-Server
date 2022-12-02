@@ -84,4 +84,5 @@ module.exports = (sequelize) => {
 
     // User.belongsToMany(models.User, {as: "Followed", foreignKey: "Followedid", through: "follow"})
   }
+  return User
 };

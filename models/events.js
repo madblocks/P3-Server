@@ -76,4 +76,5 @@ module.exports = (sequelize) => {
       as: "eventLiked"
     })
   }
+  return Event
 }

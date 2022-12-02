@@ -45,4 +45,5 @@ module.exports = (sequelize) => {
       as: "commentsLiked"
     })
   }
+  return Comment
 };

@@ -23,4 +23,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'attending',
     timestamps: true
   });
+  return Attending
 };

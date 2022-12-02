@@ -24,4 +24,5 @@ module.exports = (sequelize) => {
     tableName: 'eventLikes',
     timestamps: true
   });
+  return EventLikes
 };
