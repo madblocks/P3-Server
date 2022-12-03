@@ -35,7 +35,7 @@ const QueryStringSearch = async (req, res) => {
     const results = await sequelize.query(
       'SELECT * FROM events WHERE name LIKE :name',
       {
-        replacements: {name: '%ki%'},
+        replacements: {name: `%${req.params.name}%`},
         type: QueryTypes.SELECT
       }
     ) 
