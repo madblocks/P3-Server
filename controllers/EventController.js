@@ -32,14 +32,14 @@ const FindEventsByDateAsc = async (req, res) => {
 //url /api/event/<req.query>
 const QueryStringSearch = async (req, res) => {
   try {
-    const search = await sequelize.query(
-      'SELECT * FROM events WHERE name LIKE :search_name',
+    const results = await sequelize.query(
+      'SELECT * FROM events WHERE name LIKE :name',
       {
-        replacements: {search_name: req.query},
+        replacements: {name: '%ki%'},
         type: QueryTypes.SELECT
       }
-    )
-    res.send(search)
+    ) 
+    res.send(results)
   } catch(error) {
     throw(error)
   }
