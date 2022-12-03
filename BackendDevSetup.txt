@@ -31,6 +31,9 @@
 3. Seed database
   > sequelize db:seed:all
 
+4. Create .env with the following variables:
+  SALT_ROUNDS
+  APP_SECRET
 
 Recreate database
   - If theres any issues or has been updated undo the migrations and reseed.
