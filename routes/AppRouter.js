@@ -7,6 +7,6 @@ const AuthRouter = require('./AuthRouter')
 Router.use('/user', UserRouter)
 Router.use('/event', EventRouter)
 Router.use('/comment', CommentRouter)
-// Router.use('/auth', AuthRouter)
+Router.use('/auth', AuthRouter)
 
 module.exports = Router

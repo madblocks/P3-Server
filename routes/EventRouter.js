@@ -7,7 +7,7 @@ Router.get('/', controller.FindEventsByDateAsc)
 //url: /api/:name
 Router.get('/:name', controller.GetEventByActivity)
 
-//url: /api/:<string>
+//url: /api/search/:<string>
 Router.get('/search/:name', controller.QueryStringSearch)
 
 // url: /api/event/:eventId
