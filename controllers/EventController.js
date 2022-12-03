@@ -1,4 +1,5 @@
-const { User, Event, Comment, Activity } = require('../models')
+const { User, Event, Comment, Activity, sequelize, } = require('../models');
+const { QueryTypes } = require('sequelize')
 
 // url: /api/event
 //works tested
@@ -24,6 +25,23 @@ const FindEventsByDateAsc = async (req, res) => {
     res.send(result)
   } catch (error) {
     throw error
+  }
+}
+
+//find event by query string 
+//url /api/event/<req.query>
+const QueryStringSearch = async (req, res) => {
+  try {
+    const results = await sequelize.query(
+      'SELECT * FROM events WHERE name LIKE :name',
+      {
+        replacements: {name: `%${req.params.name}%`},
+        type: QueryTypes.SELECT
+      }
+    ) 
+    res.send(results)
+  } catch(error) {
+    throw(error)
   }
 }
 
@@ -55,23 +73,6 @@ const GetEventByActivity = async (req, res) => {
   }
 }
 
-//url /api/event/:username
-//not functioning returns []
-//will return to later -JV 
-const GetEventByUserId = async (req, res) => {
-  try{
-    const result = await Event.findAll({
-      order : [["date", 'ASC']],
-      where : {userId : req.params.userId},
-      attributes : [ 'name'
-
-      ]
-    })
-    res.send(result)
-  } catch (error) {
-    throw error
-  }
-}
 
 // url: /api/event/:eventId
 const GetEvent = async (req, res) => {
@@ -136,9 +137,8 @@ const DeleteEvent = async (req, res) => {
 
 module.exports = {
   FindEventsByDateAsc,
+  QueryStringSearch,
   GetEventByActivity,
-  GetEventByActivityID,
-  GetEventByUserId,
   GetEvent,
   CreateEvent,
   UpdateEvent,
