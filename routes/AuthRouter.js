@@ -5,6 +5,6 @@ const controller = require('../controllers/AuthController')
 Router.post('/login', controller.Login)
 Router.post('/register', controller.Register)
 Router.post('/update', auth.stripToken, auth.verifyToken, controller.UpdatePassword)
-Router.post('/session', auth.stripToken, auth.verifyToken, controller.CheckSession)
+Router.get('/session', auth.stripToken, auth.verifyToken, controller.CheckSession)
 
 module.exports = Router
