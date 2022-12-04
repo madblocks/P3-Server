@@ -28,6 +28,19 @@ const FindEventsByDateAsc = async (req, res) => {
   }
 }
 
+// use query string here with base events url  /api/events
+// remove teh FindEventsByDateAsc above
+const FindEvents = async (req, res) => {
+  try {
+    const result = await Event.findAll({
+
+    })
+    res.send(result)
+  } catch (error) {
+    throw error
+  }
+}
+
 //find event by query string 
 //url /api/event/<req.query>
 const QueryStringSearch = async (req, res) => {
@@ -136,6 +149,7 @@ const DeleteEvent = async (req, res) => {
 }
 
 module.exports = {
+  FindEvents,
   FindEventsByDateAsc,
   QueryStringSearch,
   GetEventByActivity,
