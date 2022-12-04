@@ -3,6 +3,7 @@ const auth = require('../middleware/auth')
 
 // url: /api/auth/login
 const Login = async (req, res) => {
+  console.log(req.body)
   try {
     const user = await User.findOne({
       where: { username: req.body.username },
@@ -13,6 +14,7 @@ const Login = async (req, res) => {
     ) {
       let payload = {
         id: user.id,
+        username: user.username,
         email: user.email
       }
       let token = auth.createToken(payload)
