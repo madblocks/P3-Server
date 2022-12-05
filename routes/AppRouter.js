@@ -3,12 +3,13 @@ const UserRouter = require('./UserRouter')
 const EventRouter = require('./EventRouter')
 const CommentRouter = require('./CommentRouter')
 const AuthRouter = require('./AuthRouter')
-const CommentLikesRouter =('./CommentLikesController')
+const CommentLikesRouter =require('./CommentLikesRouter')
 
 
 Router.use('/user', UserRouter)
 Router.use('/event', EventRouter)
 Router.use('/comment', CommentRouter)
+Router.use('/commentlikes', CommentLikesRouter)
 Router.use('/auth', AuthRouter)
 
 module.exports = Router
