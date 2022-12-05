@@ -1,8 +1,8 @@
 const Router = require('express').Router()
 const controller = require('../controllers/EventController')
 
-// url: /api/event
-Router.get('/:name', controller.FindEvents)
+// url: /api/event/?name=Fishing
+Router.get('/', controller.FindEvents)
 //url: /api/:name
 Router.get('/:name', controller.GetEventByActivity)
 
