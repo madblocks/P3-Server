@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     icon: {
       type: DataTypes.STRING,
-      defaultValue: 'placeholder'
+      defaultValue: ''
     }
   }, {
     tableName:'activities'

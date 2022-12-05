@@ -6,62 +6,62 @@ module.exports = {
     await queryInterface.bulkInsert('activities',
       [
         {
-          name: 'Hikes',
-          icon: 'placeholder',
+          name: 'Hiking',
+          icon: 'logo/hiking/hiking.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Running',
-          icon: 'placeholder',
+          icon: 'logo/running/running.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Ultimate Frisbee',
-          icon: 'placeholder',
+          icon: 'logo/utimate/ultimate1.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Skiing',
-          icon: 'placeholder',
+          icon: 'logo/skiing/skiing1.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Mountain Biking',
-          icon: 'placeholder',
+          icon: 'logo/mountain-biking/mountain-biking.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Road Biking',
-          icon: 'placeholder',
+          icon: 'logo/road-biking/biking.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Kayaking',
-          icon: 'placeholder',
+          icon: 'logo/kayaking/kayak1.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Whitewater Rafting',
-          icon: 'placeholder',
+          icon: 'logo/rafting/rafting.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Fishing',
-          icon: 'placeholder',
+          icon: '/logo/fishing/fishing.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: 'Bird Watching',
-          icon: 'placeholder',
+          icon: '/logo/bird-watching/bird3.svg',
           createdAt: new Date(),
           updatedAt: new Date()
         }
