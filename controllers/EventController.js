@@ -2,6 +2,7 @@ const { User, Event, Comment, Activity, Sequelize, } = require('../models');
 const { QueryTypes } = require('Sequelize')
 
 // use query string here with base events url  /api/events
+// stole this code from this video link:https://www.youtube.com/watch?v=IPC-jZbafOk&ab_channel=LukmanHarun
 const FindEvents = async (req, res) => {
   try {
     const where = {};
