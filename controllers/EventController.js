@@ -15,6 +15,7 @@ const FindEvents = async (req, res) => {
     if(recurring) where.recurring = {[Sequelize.Op.like]: `%${recurring}%` }
 
     const results = await Event.findAll({
+      order: [["date", `asc`]],
       where: {
         ...where
       }

@@ -1,7 +1,7 @@
 const Router = require('express').Router()
 const controller = require('../controllers/CommentController')
 
-// url: /api/comment
+// url: /api/comment?params=query
 Router.get('/', controller.FindComments)
 
 // url: /api/comment/:commentId

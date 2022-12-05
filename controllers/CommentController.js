@@ -1,10 +1,23 @@
-const { User, Event, Comment } = require('../models')
+const { User, Event, Comment, Sequelize } = require('../models')
 
-// needs query string implemented
+// query string implemented on 12/5 3:53 est 
 const FindComments = async (req, res) => {
   try {
-    const result = await Comment.findAll()
-    res.send(result)
+    const where = {};
+    //query params 
+    const {id, userId, eventId, body} = req.query;
+    if(id) where.id = {[Sequelize.Op.like]: `%${id}%`}
+    if(userId) where.userId = {[Sequelize.Op.like]: `%${userId}%`}
+    if(eventId) where.eventId = {[Sequelize.Op.like]: `%${eventId}%`}
+    if(body) where.body = {[Sequelize.Op.like]: `%${body}%`}
+
+    const results = await Comment.findAll({
+      order: [["date", "asc"]],
+    where: {
+      ...where
+    }
+    })
+    res.send(results)
   } catch (error) {
     throw error
   }
