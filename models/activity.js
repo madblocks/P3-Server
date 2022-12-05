@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    ref: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     icon: {
       type: DataTypes.STRING,
       defaultValue: ''

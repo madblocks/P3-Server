@@ -7,19 +7,25 @@ const FindEventsByDateAsc = async (req, res) => {
   try {
     const result = await Event.findAll({
       order: [['date', 'ASC']],
-      attributes: [ 'name',
+      attributes: [ 'id',
+                    'name',
                     'date',
                     'city',
                     'state',
                     'longitude',
                     'latitude',
                     'recurring',
-                    'description'
+                    'description',
+                    'activityId',     
       ],
       include: [{
         model: User,
         as: "user",
         attributes: ["username"]
+      },{
+        model: Activity,
+        as: "activity",
+        attributes: ["name","ref","icon"]
       }]
   })
     res.send(result)
