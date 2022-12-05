@@ -52,6 +52,9 @@ module.exports = (sequelize) => {
     recurring: {
       type: DataTypes.STRING,
       defaultValue: ""
+    },
+    img: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
     }
   }, {
     tableName: "events" 
