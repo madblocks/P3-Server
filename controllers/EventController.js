@@ -1,5 +1,39 @@
-const { User, Event, Comment, Activity, Sequelize, } = require('../models');
-const { QueryTypes } = require('Sequelize')
+const { User, Event, Comment, Activity, sequelize, } = require('../models');
+const { QueryTypes } = require('sequelize')
+
+// url: /api/event
+//works tested
+const FindEventsByDateAsc = async (req, res) => {
+  try {
+    const result = await Event.findAll({
+      order: [['date', 'ASC']],
+      attributes: [ 'id',
+                    'name',
+                    'date',
+                    'city',
+                    'state',
+                    'longitude',
+                    'latitude',
+                    'recurring',
+                    'description',
+                    'activityId',     
+      ],
+      include: [{
+        model: User,
+        as: "user",
+        attributes: ["username"]
+      },{
+        model: Activity,
+        as: "activity",
+        attributes: ["name","ref","icon"]
+      }]
+  })
+    res.send(result)
+  } catch (error) {
+    throw error
+  }
+}
+
 
 // use query string here with base events url  /api/events
 // stole this code from this video link:https://www.youtube.com/watch?v=IPC-jZbafOk&ab_channel=LukmanHarun
