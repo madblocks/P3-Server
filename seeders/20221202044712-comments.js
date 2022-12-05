@@ -1,37 +1,32 @@
 'use strict';
+const falso = require('@ngneat/falso');
+const { User, Event, sequelize } = require('../models');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('comments', 
-      [
-
-        {
-          userId:"b8e3065f-5d6e-4c18-89a4-ee14c889a15c",
-          eventId:"0f06f945-0c2f-48b9-add6-b4a068012c1f",
-          body:" 5/10 too much water ",
+    const comments = await Promise.all(
+      [...Array(350)].map(async () => {
+      
+        //PICK A RANDOM USER 
+        let user = await User.findOne({ order: sequelize.random(), raw: true})
+        //Pick a random event 
+        let event = await Event.findOne({ order: sequelize.random(), raw: true})
+        //pick a random phrase 
+        let phrases = ['Wow', 'so much fun', 
+        'definitly not sponsered to comment on this event', '7/10 too much water', 'saw too many birds for my liking', 'too cold', 'organisers need to do a better job','i like wearing shorts they easy and comfy to wear']
+        
+        return {
+          userId: user.id, 
+          eventId: event.id,
+          body:  phrases[Math.floor(Math.random() * phrases.length)], 
           createdAt: new Date(),
           updatedAt: new Date()
-        },
-        {
-          userId:"38db415f-cd22-4980-94b2-ca0e2232ad0e",
-          eventId:"1404d876-c8dc-4eb3-bebc-5e29e3e22f14",
-          body:" too cold ",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          userId:"38db415f-cd22-4980-94b2-ca0e2232ad0e",
-          eventId:"2557d3bc-e31e-4ff4-908b-db67727de82d",
-          body:" i love running in these shorts ",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-
-      ]
+        }
+      })
     )
-  },
-
+      return queryInterface.bulkInsert('comments', comments)
+    },
   async down (queryInterface, Sequelize) {
     await queryInterface.bulkDelete('comments', null, {})
   }

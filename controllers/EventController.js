@@ -1,57 +1,23 @@
-const { User, Event, Comment, Activity, sequelize, } = require('../models');
-const { QueryTypes } = require('sequelize')
-
-// url: /api/event
-//works tested
-const FindEventsByDateAsc = async (req, res) => {
-  try {
-    const result = await Event.findAll({
-      order: [['date', 'ASC']],
-      attributes: [ 'name',
-                    'date',
-                    'city',
-                    'state',
-                    'longitude',
-                    'latitude',
-                    'recurring',
-                    'description'
-      ],
-      include: [{
-        model: User,
-        as: "user",
-        attributes: ["username"]
-      }]
-  })
-    res.send(result)
-  } catch (error) {
-    throw error
-  }
-}
+const { User, Event, Comment, Activity, Sequelize, } = require('../models');
+const { QueryTypes } = require('Sequelize')
 
 // use query string here with base events url  /api/events
-// remove teh FindEventsByDateAsc above
 const FindEvents = async (req, res) => {
   try {
-    const result = await Event.findAll({
+    const where = {};
+    //query params 
+    const { name, date, city, state, recurring } = req.query;
+    if(name) where.name = {[Sequelize.Op.like]: `%${name}%` }
+    if(date) where.date = {[Sequelize.Op.order]: `%${date}%` }
+    if(city) where.city = {[Sequelize.Op.like]: `%${city}%` }
+    if(state) where.state = {[Sequelize.Op.like]: `%${state}%` }
+    if(recurring) where.recurring = {[Sequelize.Op.like]: `%${recurring}%` }
 
-    })
-    res.send(result)
-  } catch (error) {
-    throw error
-  }
-}
-
-//find event by query string 
-//url /api/event/<req.query>
-const QueryStringSearch = async (req, res) => {
-  try {
-    const results = await sequelize.query(
-      'SELECT * FROM events WHERE name LIKE :name',
-      {
-        replacements: {name: `%${req.params.name}%`},
-        type: QueryTypes.SELECT
+    const results = await Event.findAll({
+      where: {
+        ...where
       }
-    ) 
+    })
     res.send(results)
   } catch(error) {
     throw(error)
@@ -150,8 +116,6 @@ const DeleteEvent = async (req, res) => {
 
 module.exports = {
   FindEvents,
-  FindEventsByDateAsc,
-  QueryStringSearch,
   GetEventByActivity,
   GetEvent,
   CreateEvent,
