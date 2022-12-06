@@ -62,21 +62,21 @@ module.exports = (sequelize) => {
     })
 
     User.belongsToMany(models.Event, {
-      through: "Attending",
+      through: "attending",
       foreignKey: "eventId",
       as: "attendedEvents"
     })
     
     User.belongsToMany(models.Comment, {
-      through: "CommentLikes",
+      through: "commentLikes",
       foreignKey: "userId",
       as: "likedComment"
     })
     
     User.belongsToMany(models.Event, {
-      through: "EventLikes",
-      foreignKey: "eventId",
-      as: "likedEvent"
+      through: models.EventLikes,
+      foreignKey: "userId",
+      as: "likedEvents"
     })
   
   }
