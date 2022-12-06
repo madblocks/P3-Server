@@ -68,7 +68,7 @@ module.exports = (sequelize) => {
     })
     
     User.belongsToMany(models.Comment, {
-      through: "commentLikes",
+      through: models.CommentLikes,
       foreignKey: "userId",
       as: "likedComment"
     })

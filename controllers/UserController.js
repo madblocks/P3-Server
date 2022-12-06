@@ -13,13 +13,6 @@ const FindUser = async (req, res) => {
         as: 'likedEvents',
         attributes: ['id'],
         through: {attributes: []}
-      },
-      {
-        model: Event,
-        as: 'attendingEvents',
-        attributes: ['id','name','date','description','img'],
-        through: {attributes: []}
-      }
     ]
     })
     res.send(result)
