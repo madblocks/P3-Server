@@ -1,6 +1,18 @@
 'use strict';
 const { User, Activity, sequelize } = require('../models')
 const falso = require('@ngneat/falso')
+const fs = require('fs')
+
+const img_Assets_Path = __dirname + '/../assets/public/images'
+const imgsApiUrl = 'img/'
+let images = {}
+fs.readdirSync(img_Assets_Path).filter(dirItem => !dirItem.includes('.')).map(folder => {
+  images[folder] = fs.readdirSync(img_Assets_Path + '/' + folder).filter(dirItem => dirItem.slice(-4) === '.jpg')
+})
+
+const weightedNumArray = [1,1,1,1,1,1,2,2,3,3]
+
+const recurring = ['no','daily','weekly','bi-weekly','monthly']
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -9,6 +21,17 @@ module.exports = {
       [...Array(50)].map(async () => {
         let user = await User.findOne({ order: sequelize.random(), raw: true })
         let activity = await Activity.findOne({ order: sequelize.random(), raw: true})
+        
+        // get random number of images
+        let imageFolder = activity.name.split(' ').join('_').toLowerCase()
+        let randWeightIndex = Math.floor(Math.random() * weightedNumArray.length)
+        let weightedRandNumOfImages = weightedNumArray[randWeightIndex]
+        let imageList = [...images[imageFolder]]
+        let randImages = []
+        for (let i = 0; i < weightedRandNumOfImages; i++) {
+          let imgUrl = 'img/' + imageFolder + '/' + imageList.splice(Math.floor(Math.random() * imageList.length), 1)[0]
+          randImages.push(imgUrl)
+        }
 
         return {
           name: activity.name,
@@ -20,7 +43,8 @@ module.exports = {
           city: 'Ashville',
           state: 'NC',
           description: falso.randParagraph(),
-          recurring: 'what should we do here?',
+          recurring: recurring[Math.floor(Math.random() * recurring.length)],
+          img: randImages,
           createdAt: new Date(),
           updatedAt: new Date()
         }
