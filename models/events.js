@@ -59,29 +59,30 @@ module.exports = (sequelize) => {
   }, {
     tableName: "events" 
   });
-  Event.associate = function(model) {
+  Event.associate = function(models) {
 
-    Event.hasMany(model.Comment, {
+    Event.hasMany(models.Comment, {
       foreignKey: "id",
       as: 'comments'
     })
 
-    Event.belongsTo(model.Activity, {
+    Event.belongsTo(models.Activity, {
       as: 'activity'
     })
 
-    Event.belongsTo(model.User, {
-      as: 'user'
+    Event.belongsTo(models.User, {
+      as: 'owner',
+      foreignKey: 'userId'
     })
 
-    Event.belongsToMany(model.User, {
-      through: "Attending",
-      foreignKey: "userId",
+    Event.belongsToMany(models.User, {
+      through: models.Attending,
+      foreignKey: "eventId",
       as: "attendees"
     })
 
-    Event.belongsToMany(model.User, {
-      through: model.EventLikes,
+    Event.belongsToMany(models.User, {
+      through: models.EventLikes,
       foreignKey: "eventId",
       as: "eventsLiked"
     })
