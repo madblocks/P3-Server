@@ -1,29 +1,29 @@
 'use strict';
-const { User, Comment, sequelize } = require('../models')
+const { User, Event, sequelize } = require('../models')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const commentLikes = await Promise.all(
+    const attending = await Promise.all(
       [...Array(200)].map(async () => {
 
         //pick a random user 
         let user = await User.findOne({ order: sequelize.random(), raw: true})
-        //pick a random comment 
-        let comment = await Comment.findOne({ order: sequelize.random(), raw: true})
+        //pick a random event
+        let event = await Event.findOne({ order: sequelize.random(), raw: true})
 
         return {
-          commentId: comment.id,
           userId: user.id,
+          eventId: event.id,
           createdAt: new Date(), 
           updatedAt: new Date()
         }
       })
     )
-    return queryInterface.bulkInsert('commentLikes', commentLikes)
+    return queryInterface.bulkInsert('attending', attending)
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('commentLikes', null, {})
+    await queryInterface.bulkDelete('attending', null, {})
   }
 };
