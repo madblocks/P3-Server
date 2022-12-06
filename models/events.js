@@ -53,16 +53,16 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       defaultValue: ""
     },
-    // img: {
-    //   type: DataTypes.ARRAY(DataTypes.STRING)
-    // }
+    img: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
+    }
   }, {
     tableName: "events" 
   });
   Event.associate = function(model) {
 
     Event.hasMany(model.Comment, {
-      foreignKey: "commentId",
+      foreignKey: "id",
       as: 'comments'
     })
 
@@ -83,7 +83,7 @@ module.exports = (sequelize) => {
     Event.belongsToMany(model.User, {
       through: "EventLikes",
       foreignKey: "userId",
-      as: "eventLiked"
+      as: "eventsLiked"
     })
   }
   return Event

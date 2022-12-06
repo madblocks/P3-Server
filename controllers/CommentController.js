@@ -23,10 +23,10 @@ const FindComments = async (req, res) => {
   }
 }
 
-const GetComment = async (req, res) => {
+const GetCommentByEvent = async (req, res) => {
   try {
     const result = await Comment.findAll({
-      where: {id: req.params.eventId}
+      where: {eventId: req.params.eventId}
     })
     res.send(result)
   } catch (error) {
@@ -72,7 +72,7 @@ const DeleteComment = async (req, res) => {
 
 module.exports = {
   FindComments,
-  GetComment,
+  GetCommentByEvent,
   CreateComment,
   UpdateComment,
   DeleteComment
