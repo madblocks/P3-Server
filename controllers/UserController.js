@@ -7,12 +7,19 @@ const FindUser = async (req, res) => {
       include: [{
         model: Event,
         as: 'events'
-      },{
+      },
+      {
         model: Event,
         as: 'likedEvents',
         attributes: ['id'],
-        through: { attributes: [] }
+        through: {attributes: []}
       },
+      {
+        model: Event,
+        as: 'attendingEvents',
+        attributes: ['id','name','date','description','img'],
+        through: {attributes: []}
+      }
     ]
     })
     res.send(result)
@@ -31,7 +38,7 @@ const GetLikedEvents = async (req, res) => {
           model: Event,
           as: 'likedEvents',
           attributes: ['id','name','date','description'],
-          through: { attributes: []},
+          through: {attributes: []},
         }]
       }  
     )

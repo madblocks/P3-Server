@@ -16,16 +16,19 @@ const FindEventsByDateAsc = async (req, res) => {
                     'latitude',
                     'recurring',
                     'description',
-                    'activityId',     
+                    'activityId',
+                    'img'    
       ],
-      include: [{
-        model: User,
-        as: "user",
-        attributes: ["username"]
-      },{
-        model: Activity,
-        as: "activity",
-        attributes: ["name","ref","icon"]
+      include: [
+        {
+          model: User,
+          as: "owner",
+          attributes: ["id","username"]
+        },
+        {
+          model: Activity,
+          as: "activity",
+          attributes: ["name","ref","icon"]
       }]
   })
     res.send(result)
@@ -60,49 +63,25 @@ const FindEvents = async (req, res) => {
   }
 }
 
-//url /api/event/:name
-//works tested 
-const GetEventByActivity = async (req, res) => {
-  try {
-    const result = await Event.findAll({
-      order: [["date", "ASC"]],
-      where : {name: req.params.name },
-      attributes:[ 'name',
-                   'date',
-                   'city',
-                   'state',
-                   'longitude',
-                   'latitude',
-                   'recurring',
-                   'description'
-      ],
-      include: [{
-          model: User,
-          as:'user',
-          attributes:["username"]
-      }]
-    })
-    res.send(result)
-  } catch(error) {
-    throw error 
-  }
-}
-
-
 // url: /api/event/:eventId
-const GetEvent = async (req, res) => {
+const GetEventById = async (req, res) => {
   try {
     //console.log(req.params)
     const result = await Event.findAll({
       where: {id: req.params.eventId},
       include: [{
         model: Activity,
-        as: 'activity',
+        as: "activity",
         attributes: ['name']
       },{
         model: User,
-        as: 'user',
-        attributes: ['username']
+        as: "owner",
+        attributes: ['id','username']
+      },{
+        model: User,
+        as: "attendees",
+        attributes: ['id','username','firstName','lastName','fullName'],
+        through: {attributes: []}
       }]
     })
     res.send(result)
@@ -153,8 +132,7 @@ const DeleteEvent = async (req, res) => {
 module.exports = {
   FindEvents,
   FindEventsByDateAsc,
-  GetEventByActivity,
-  GetEvent,
+  GetEventById,
   CreateEvent,
   UpdateEvent,
   DeleteEvent
