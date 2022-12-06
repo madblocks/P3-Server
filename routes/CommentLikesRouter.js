@@ -3,8 +3,10 @@ const controller = require('../controllers/CommentLikesController')
 
 Router.get('/', controller.GetCommentLikes)
 
-Router.post('/:commentlikesid', controller.CreateCommentLikes)
-Router.post('/:commentlikesid', controller.DeleteCommentLikes)
+Router.get('/count', controller.GetAmmountOfLikes)
+
+Router.post('/', controller.CreateCommentLikes)
+Router.delete('/:commentlikesid', controller.DeleteCommentLikes)
 
 
 

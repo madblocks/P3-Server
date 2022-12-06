@@ -1,10 +1,19 @@
-const {User, Comment, Event, CommentLikes, Sequelize } = require('../models')
+const { CommentLikes } = require('../models')
 
 const GetCommentLikes = async (req, res) => {
     try {
         const result = await CommentLikes.findAll({
         
         })
+        res.send(result)
+    } catch (error) {
+        throw error 
+    }
+}
+
+const GetAmmountOfLikes = async (req, res) => {
+    try {
+        const result = await CommentLikes.findAndCountAll()
         res.send(result)
     } catch (error) {
         throw error 
@@ -22,9 +31,9 @@ const CreateCommentLikes = async (req, res) => {
 }
 
 const DeleteCommentLikes = async(req, res) => {
-    try{
+    try {
         const DeleteCommentLikes = await CommentLikes.destroy({
-            where: {id: req.params.commentLikesid },
+            where: {id: req.params.id },
              trunicate: true 
         })
         res.send(DeleteCommentLikes)
@@ -37,6 +46,7 @@ const DeleteCommentLikes = async(req, res) => {
 
 module.exports = {
     GetCommentLikes,
+    GetAmmountOfLikes,
     CreateCommentLikes, 
     DeleteCommentLikes
 }
