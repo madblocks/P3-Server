@@ -33,7 +33,7 @@ const FindEventsByDateAsc = async (req, res) => {
     throw error
   }
 }
-<<<
+
 
 // use query string here with base events url  /api/events
 // stole this code from this video link:https://www.youtube.com/watch?v=IPC-jZbafOk&ab_channel=LukmanHarun
