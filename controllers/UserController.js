@@ -4,15 +4,10 @@ const FindUser = async (req, res) => {
   try {
     const result = await User.findAll({
       where: {username: req.params.username},
-      attributes: ['username',
-                    'firstName', 
-                    'lastName', 
-                    'fullName',
-                    'email',
-                    'phoneNumber',
-                    'profileImg',
-                    'bio',
-                    'favorites']
+      include: [{
+        model: Event,
+        as: 'events'
+      }]
     })
     res.send(result)
   } catch (error) {
