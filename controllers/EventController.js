@@ -33,7 +33,7 @@ const FindEventsByDateAsc = async (req, res) => {
     throw error
   }
 }
-
+<<<
 
 // use query string here with base events url  /api/events
 // stole this code from this video link:https://www.youtube.com/watch?v=IPC-jZbafOk&ab_channel=LukmanHarun
@@ -49,6 +49,7 @@ const FindEvents = async (req, res) => {
     if(recurring) where.recurring = {[Sequelize.Op.like]: `%${recurring}%` }
 
     const results = await Event.findAll({
+      order: [["date", `asc`]],
       where: {
         ...where
       }

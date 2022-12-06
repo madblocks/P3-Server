@@ -79,12 +79,6 @@ module.exports = (sequelize) => {
       as: "likedEvent"
     })
   
-    //stole this code from the video idk if it works as it should 
-    // holding off on this until we get it basic posts working.  We'll need to create the follow table since we aren't 
-    // using sync() and maybe add the followedId
-    // User.belongsToMany(models.User, {as: "User", foreignKey: "Userid", through: "follow"})
-
-    // User.belongsToMany(models.User, {as: "Followed", foreignKey: "Followedid", through: "follow"})
   }
   return User
 };
