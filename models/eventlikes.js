@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
   EventLikes.associate = function(model){
     
     EventLikes.belongsTo(model.User, {foreignKey:'id', targetkey:'id', as:'likedEvent'})
-    EventLikes.belongsTo(model.Event, {foreignKey:'id', targetkey:'id', as:'EventLiked'})
+    EventLikes.belongsTo(model.Event, {foreignKey:'id', targetkey:'id', as:'eventsLiked'})
 
   }
   return EventLikes

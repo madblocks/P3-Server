@@ -9,10 +9,9 @@ module.exports = {
 
         //pick a random user 
         let user = await User.findOne({ order: sequelize.random(), raw: true})
-        console.log(user)
         //pick a random comment 
-        let comment = await Comment.findOne({ order: sequelize.random(), raw: true })
-        console.log(comment)
+        let comment = await Comment.findOne({ order: sequelize.random(), raw: true})
+
         return {
           commentId: comment.id,
           userId: user.id,
@@ -21,7 +20,7 @@ module.exports = {
         }
       })
     )
-    return queryInterface.bulkInsert('commentLikes', commentLikes)
+    // return queryInterface.bulkInsert('commentLikes', commentLikes)
   },
 
   async down (queryInterface, Sequelize) {
