@@ -26,6 +26,12 @@ const FindUser = async (req, res) => {
         attributes: ['id'],
         through: {attributes: []}
       }
+      {
+        model: Comment, 
+        as:"likedComment",
+        attributes: ['id'],
+        through: {attributes: []}
+      }
     ]
     })
     res.send(result)
