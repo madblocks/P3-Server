@@ -11,6 +11,15 @@ const GetCommentLikes = async (req, res) => {
     }
 }
 
+const GetAmmountOfLikes = async (req, res) => {
+    try{
+        const result = await CommentLikes.findAndCountAll()
+        res.send(result)
+    } catch (error) {
+        throw error 
+    }
+}
+
 
 const CreateCommentLikes = async (req, res) => {
     try{
@@ -37,6 +46,7 @@ const DeleteCommentLikes = async(req, res) => {
 
 module.exports = {
     GetCommentLikes,
+    GetAmmountOfLikes,
     CreateCommentLikes, 
     DeleteCommentLikes
 }
