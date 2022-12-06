@@ -1,4 +1,4 @@
-const {User, Comment, Event, CommentLikes, Sequelize } = require('../models')
+const { CommentLikes } = require('../models')
 
 const GetCommentLikes = async (req, res) => {
     try {
@@ -12,7 +12,7 @@ const GetCommentLikes = async (req, res) => {
 }
 
 const GetAmmountOfLikes = async (req, res) => {
-    try{
+    try {
         const result = await CommentLikes.findAndCountAll()
         res.send(result)
     } catch (error) {
@@ -31,9 +31,9 @@ const CreateCommentLikes = async (req, res) => {
 }
 
 const DeleteCommentLikes = async(req, res) => {
-    try{
+    try {
         const DeleteCommentLikes = await CommentLikes.destroy({
-            where: {id: req.params.commentLikesid },
+            where: {id: req.params.id },
              trunicate: true 
         })
         res.send(DeleteCommentLikes)

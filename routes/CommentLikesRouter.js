@@ -6,7 +6,7 @@ Router.get('/', controller.GetCommentLikes)
 Router.get('/count', controller.GetAmmountOfLikes)
 
 Router.post('/', controller.CreateCommentLikes)
-Router.post('/:commentlikesid', controller.DeleteCommentLikes)
+Router.delete('/:commentlikesid', controller.DeleteCommentLikes)
 
 
 
