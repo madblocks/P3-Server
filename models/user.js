@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
         return `${this.firstName} ${this.lastName}`
       }
     },
-    profileImg: DataTypes.STRING,
+    avatar: DataTypes.STRING,
     bio: DataTypes.STRING,
     passwordDigest: {
       type: DataTypes.STRING,
