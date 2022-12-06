@@ -31,6 +31,12 @@ const FindUser = async (req, res) => {
         as:"likedComment",
         attributes: ['id'],
         through: {attributes: []}
+      },
+      {
+        model: Event,
+        as: 'attendingEvents',
+        attributes: ['id','name','date','description','img'],
+        through: {attributes: []}
       }
     ]
     })
