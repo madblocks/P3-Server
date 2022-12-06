@@ -14,7 +14,7 @@ fs.readdirSync(avatar_Assets_Path).filter(dirItem => !dirItem.includes('.')).map
 module.exports = {
   async up (queryInterface, Sequelize) {
     const users = await Promise.all(
-      [...Array(100)].map(async () => {
+      [...Array(20)].map(async () => {
         let user = falso.randUser()
         let folder = Object.keys(avatars)[Math.floor(Math.random() * Object.keys(avatars).length)]
         let avatar = avatars[folder][Math.floor(Math.random() * avatars[folder].length)]

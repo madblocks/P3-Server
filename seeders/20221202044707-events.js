@@ -17,7 +17,7 @@ const recurring = ['no','daily','weekly','bi-weekly','monthly']
 module.exports = {
   async up (queryInterface, Sequelize) {
     const events = await Promise.all(
-      [...Array(50)].map(async () => {
+      [...Array(80)].map(async () => {
         let user = await User.findOne({ order: sequelize.random(), raw: true })
         let activity = await Activity.findOne({ order: sequelize.random(), raw: true})
         
