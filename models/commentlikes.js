@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'commentLikes',
   });
-  CommentLikes.associate = function(model) {
+  // CommentLikes.associate = function(model) {
 
-    CommentLikes.belongsTo(model.Comment, {foreignKey: 'id', targetKey: 'id', as:'likedComment'})
-    CommentLikes.belongsTo(model.User, {foreignKey: 'id', targetKey: 'id', as:'commentLiked'})
+  //   CommentLikes.belongsTo(model.Comment, {foreignKey: 'id', targetKey: 'id', as:'likedComment'})
+  //   CommentLikes.belongsTo(model.User, {foreignKey: 'id', targetKey: 'id', as:'commentLiked'})
 
-  }
+  // }
   return CommentLikes
 };

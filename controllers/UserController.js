@@ -7,8 +7,34 @@ const FindUser = async (req, res) => {
       include: [{
         model: Event,
         as: 'events'
-      }]
+      },{
+        model: Event,
+        as: 'likedEvents',
+        attributes: ['id'],
+        through: { attributes: [] }
+      },
+    ]
     })
+    res.send(result)
+  } catch (error) {
+    throw error
+  }
+}
+
+const GetLikedEvents = async (req, res) => {
+  try {
+    const result = await User.findAll(
+      {
+        where: {username: req.params.username},
+        attributes: ['id', 'username'],
+        include: [{
+          model: Event,
+          as: 'likedEvents',
+          attributes: ['id','name','date','description'],
+          through: { attributes: []},
+        }]
+      }  
+    )
     res.send(result)
   } catch (error) {
     throw error
@@ -53,6 +79,7 @@ const DeleteUser = async (req, res) => {
 
 module.exports = {
   FindUser,
+  GetLikedEvents,
   CreateUser,
   UpdateUser,
   DeleteUser,
