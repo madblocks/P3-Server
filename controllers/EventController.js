@@ -151,6 +151,7 @@ const DeleteEvent = async (req, res) => {
 
 module.exports = {
   FindEvents,
+  FindEventsByDateAsc,
   GetEventByActivity,
   GetEvent,
   CreateEvent,

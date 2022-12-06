@@ -4,7 +4,6 @@ const falso = require('@ngneat/falso')
 const fs = require('fs')
 
 const img_Assets_Path = __dirname + '/../assets/public/images'
-const imgsApiUrl = 'img/'
 let images = {}
 fs.readdirSync(img_Assets_Path).filter(dirItem => !dirItem.includes('.')).map(folder => {
   images[folder] = fs.readdirSync(img_Assets_Path + '/' + folder).filter(dirItem => dirItem.slice(-4) === '.jpg')

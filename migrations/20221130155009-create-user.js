@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      profileImg: {
+      avatar: {
         type: Sequelize.STRING,
         defaultValue: ""
       },
