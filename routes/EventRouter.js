@@ -6,7 +6,7 @@ Router.get('/', controller.FindEvents)
 
 // url: /api/event/:eventId
 Router.get('/:eventId', controller.GetEventById)
-Router.post('/:eventId', controller.CreateEvent)
+Router.post('/', controller.CreateEvent)
 Router.put('/:eventId', controller.UpdateEvent)
 Router.delete('/:eventdId', controller.DeleteEvent)
 
