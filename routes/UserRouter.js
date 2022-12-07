@@ -7,7 +7,7 @@ Router.post('/:username', controller.CreateUser)
 Router.put('/:username', controller.UpdateUser)
 Router.delete('/:username', controller.DeleteUser)
 Router.get('/:username/likedEvents', controller.GetLikedEvents)
-
+Router.get('/avatars/list', controller.GetAvatars)
 
 
 module.exports = Router
