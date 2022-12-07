@@ -1,4 +1,4 @@
-const { User, Event, Comment} = require('../models')
+const { User, Event, Comment, Avatar} = require('../models')
 
 const FindUser = async (req, res) => {
   try {
@@ -90,10 +90,20 @@ const DeleteUser = async (req, res) => {
   }
 }
 
+const GetAvatars = async (req, res) => {
+  try {
+    const avatars = await Avatar.findAll()
+    res.send(avatars)
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   FindUser,
   GetLikedEvents,
   CreateUser,
   UpdateUser,
   DeleteUser,
+  GetAvatars,
 }
