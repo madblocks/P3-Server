@@ -1,5 +1,4 @@
 const { User, Event, Comment, Activity } = require('../models');
-
 const { Op, QueryTypes } = require('sequelize')
 
 // url:  /api/event
@@ -10,27 +9,39 @@ const FindEvents = async (req, res) => {
   try {
     const where = {};
     const whereUser = {};
-    //query params 
-    const { name, date, city, state, recurring, activityId, ownerId, owner, limit } = req.query;
+    const { name, start, end, city, state, recurring, activityId, ownerId, owner, limit, attendees, comments, likes} = req.query;
     if(name) where.name = { [Op.like]: `%${name}%` }
-    if(date) where.date = { [Op.order]: `%${date}%` }
     if(city) where.city = { [Op.like]: `%${city}%` }
     if(state) where.state = { [Op.eq]: state }
     if(recurring) where.recurring = { [Op.eq]: recurring }
     if(activityId) where.activityId = { [Op.eq]: activityId }
     if(ownerId) whereUser.id = { [Op.eq]: ownerId}
     if(owner) whereUser.username = { [Op.eq]: owner}
+    if(start && end) where.date = { [Op.between]: [start, end]}
+    if(start && !end) where.date = { [Op.gte]: start}
+
+    let include = [
+      { model: User, as: 'owner', attributes: ['id','username'], where: {...whereUser}},
+      { model: Activity, as: "activity", attributes: ['name','ref','icon'] }
+    ]
+  
+    if(attendees==='true') include = [...include, {
+                              model: User, 
+                              as: 'attendees', 
+                              attributes: ['id','username','firstName','lastName','fullName'], 
+                              through: {attributes: []},
+                              required: false }]
+    if(comments==='true') include = [...include, { model: Comment, as: 'comments', required: false }]   
+    if(likes==='true') include = [...include, { model: User, as: 'eventLikedBy', required: false, attributes:['id', 'username'], through: {attributes: []}}]              
 
     const results = await Event.findAll({
       limit: limit || 100,
-      order: [["date", `asc`]],
+      order: [['date', `asc`]],
       where: { ...where },
-      attributes: ['id', 'name', 'date', 'city', 'state', 'longitude', 'latitude',
+      attributes: [ 'id', 'name', 'date',
+                    'city', 'state', 'longitude', 'latitude',
                     'recurring', 'description', 'activityId', 'img'],
-      include: [
-        { model: User, as: "owner", attributes: ["id","username"], where: {...whereUser}},
-        { model: Activity, as: "activity", attributes: ["name","ref","icon"] },
-      ]
+      include: include,
     })
     res.send(results)
   } catch(error) {
@@ -56,7 +67,12 @@ const GetEventById = async (req, res) => {
         model: User,
         as: "attendees",
         attributes: ['id','username','firstName','lastName','fullName'],
-        through: {attributes: []}
+        through: {attributes: []},
+        required: false
+      },{
+        model: Comment,
+        as: "comments",
+        required: false
       }]
     })
     res.send(result)
