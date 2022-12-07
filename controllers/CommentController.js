@@ -1,15 +1,16 @@
 const { User, Event, Comment, Sequelize } = require('../models')
+const { Op, QueryTypes } = require('sequelize')
 
 // query string implemented on 12/5 3:53 est 
 const FindComments = async (req, res) => {
   try {
     const where = {};
-    //query params 
+    //query params
     const {id, userId, eventId, body} = req.query;
-    if(id) where.id = {[Sequelize.Op.like]: `%${id}%`}
-    if(userId) where.userId = {[Sequelize.Op.like]: `%${userId}%`}
-    if(eventId) where.eventId = {[Sequelize.Op.like]: `%${eventId}%`}
-    if(body) where.body = {[Sequelize.Op.like]: `%${body}%`}
+    if(id) where.id = {[Op.like]: `%${id}%`}
+    if(userId) where.userId = {[Op.like]: `%${userId}%`}
+    if(eventId) where.eventId = {[Op.like]: `%${eventId}%`}
+    if(body) where.body = {[Op.like]: `%${body}%`}
 
     const results = await Comment.findAll({
       order: [["date", "asc"]],

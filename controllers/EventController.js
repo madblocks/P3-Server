@@ -1,61 +1,36 @@
-const { User, Event, Comment, Activity, sequelize, } = require('../models');
-const { QueryTypes } = require('sequelize')
+const { User, Event, Comment, Activity } = require('../models');
 
-// url: /api/event
-//works tested
-const FindEventsByDateAsc = async (req, res) => {
-  try {
-    const result = await Event.findAll({
-      order: [['date', 'ASC']],
-      attributes: [ 'id',
-                    'name',
-                    'date',
-                    'city',
-                    'state',
-                    'longitude',
-                    'latitude',
-                    'recurring',
-                    'description',
-                    'activityId',
-                    'img'    
-      ],
-      include: [
-        {
-          model: User,
-          as: "owner",
-          attributes: ["id","username"]
-        },
-        {
-          model: Activity,
-          as: "activity",
-          attributes: ["name","ref","icon"]
-      }]
-  })
-    res.send(result)
-  } catch (error) {
-    throw error
-  }
-}
+const { Op, QueryTypes } = require('sequelize')
 
-
-// use query string here with base events url  /api/events
+// url:  /api/event
+// url: /api/event/?query=value or /api/event?query=value&query=value
 // stole this code from this video link:https://www.youtube.com/watch?v=IPC-jZbafOk&ab_channel=LukmanHarun
+// need to check out npm package 'express-validator' from video
 const FindEvents = async (req, res) => {
   try {
     const where = {};
+    const whereUser = {};
     //query params 
-    const { name, date, city, state, recurring } = req.query;
-    if(name) where.name = {[Sequelize.Op.like]: `%${name}%` }
-    if(date) where.date = {[Sequelize.Op.order]: `%${date}%` }
-    if(city) where.city = {[Sequelize.Op.like]: `%${city}%` }
-    if(state) where.state = {[Sequelize.Op.like]: `%${state}%` }
-    if(recurring) where.recurring = {[Sequelize.Op.like]: `%${recurring}%` }
+    const { name, date, city, state, recurring, activityId, ownerId, owner, limit } = req.query;
+    if(name) where.name = { [Op.like]: `%${name}%` }
+    if(date) where.date = { [Op.order]: `%${date}%` }
+    if(city) where.city = { [Op.like]: `%${city}%` }
+    if(state) where.state = { [Op.eq]: state }
+    if(recurring) where.recurring = { [Op.eq]: recurring }
+    if(activityId) where.activityId = { [Op.eq]: activityId }
+    if(ownerId) whereUser.id = { [Op.eq]: ownerId}
+    if(owner) whereUser.username = { [Op.eq]: owner}
 
     const results = await Event.findAll({
+      limit: limit || 100,
       order: [["date", `asc`]],
-      where: {
-        ...where
-      }
+      where: { ...where },
+      attributes: ['id', 'name', 'date', 'city', 'state', 'longitude', 'latitude',
+                    'recurring', 'description', 'activityId', 'img'],
+      include: [
+        { model: User, as: "owner", attributes: ["id","username"], where: {...whereUser}},
+        { model: Activity, as: "activity", attributes: ["name","ref","icon"] },
+      ]
     })
     res.send(results)
   } catch(error) {
@@ -131,7 +106,6 @@ const DeleteEvent = async (req, res) => {
 
 module.exports = {
   FindEvents,
-  FindEventsByDateAsc,
   GetEventById,
   CreateEvent,
   UpdateEvent,
