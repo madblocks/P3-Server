@@ -31,7 +31,7 @@ const GetCommentByEvent = async (req, res) => {
       include: [{
         model: User,
         as: "user",
-        attributes: ['id','username']
+        attributes: ['id','username','avatar']
       }]
     })
     res.send(result)
