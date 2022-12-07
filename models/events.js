@@ -30,7 +30,8 @@ module.exports = (sequelize) => {
       }
     },
     date: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false
     },
     longitude: {
       type: DataTypes.FLOAT,
@@ -62,7 +63,7 @@ module.exports = (sequelize) => {
   Event.associate = function(models) {
 
     Event.hasMany(models.Comment, {
-      foreignKey: "id",
+      foreignKey: "eventId",
       as: 'comments'
     })
 
@@ -84,7 +85,7 @@ module.exports = (sequelize) => {
     Event.belongsToMany(models.User, {
       through: models.EventLikes,
       foreignKey: "eventId",
-      as: "eventsLiked"
+      as: "eventLikedBy"
     })
   }
   return Event

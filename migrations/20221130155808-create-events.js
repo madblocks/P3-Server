@@ -31,6 +31,7 @@ module.exports = {
       date: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
+        allowNull: false
       },
       longitude: {
         type: Sequelize.FLOAT,
