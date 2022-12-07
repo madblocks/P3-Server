@@ -27,7 +27,12 @@ const FindComments = async (req, res) => {
 const GetCommentByEvent = async (req, res) => {
   try {
     const result = await Comment.findAll({
-      where: {eventId: req.params.eventId}
+      where: {eventId: req.params.eventId},
+      include: [{
+        model: User,
+        as: "user",
+        attributes: ['id','username']
+      }]
     })
     res.send(result)
   } catch (error) {
