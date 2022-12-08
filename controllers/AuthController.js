@@ -15,7 +15,8 @@ const Login = async (req, res) => {
       let payload = {
         id: user.id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        avatar: user.avatar
       }
       let token = auth.createToken(payload)
       return res.send({ user: payload, token})
