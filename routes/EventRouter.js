@@ -9,7 +9,10 @@ Router.get('/', controller.FindEvents)
 Router.get('/:eventId', controller.GetEventById)
 Router.post('/', auth.stripToken, auth.verifyToken, controller.CreateEvent)
 Router.put('/:eventId', auth.stripToken, auth.verifyToken, controller.UpdateEvent)
+
+
 Router.delete('/:eventdId', auth.stripToken, auth.verifyToken, controller.DeleteEvent)
+
 
 
 
