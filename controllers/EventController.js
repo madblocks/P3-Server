@@ -10,7 +10,7 @@ const FindEvents = async (req, res) => {
     const where = {};
     const whereUser = {};
     const { name, start, end, city, state, recurring, activityId, ownerId, owner, limit, attendees, comments, likes} = req.query;
-    if(name) where.name = { [Op.like]: `%${name}%` }
+    if(name) where.name = { [Op.like]: `%${decodeURIComponent(name)}%` }
     if(city) where.city = { [Op.like]: `%${city}%` }
     if(state) where.state = { [Op.eq]: state }
     if(recurring) where.recurring = { [Op.eq]: recurring }
