@@ -69,7 +69,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        username: 'xXLeetCSSXx',
+        username: 'Umika',
         firstName: 'Umida',
         lastName: 'Mystery',
         avatar: 'avatar/animals/bee-svgrepo-com.svg',
