@@ -11,6 +11,19 @@ fs.readdirSync(img_Assets_Path).filter(dirItem => !dirItem.includes('.')).map(fo
 
 const weightedNumArray = [1,1,1,1,1,1,2,2,3,3]
 
+const eventWordBank = {
+  hiking: ['Group Hike','Trails Friends Hike', 'Hike-a-thon','Day Hike','Evening Hike','Easy Hike','Dog Friendly Hike'],
+  running: ['Group Run','Trail Run','Early Morning Run','5k Trail Run','Backcountry Run','40k Ultra Hellraiser'],
+  ultimate: ['Ultimate Pick-up Game','Club Ultimate','Ultimate Frisbee','Ultimate Frisbee League','Dusk till Dawn Frisbee'],
+  skiing: ['Skiing Lessons','Ski Resort','Ski Slopes','Skiing','Snowboarding Sundays'],
+  mountainBiking: ['Group Ride','Free Rides to top','Mountain Bike Trails','Mountain Bike Ride'],
+  roadBiking: ['Group Ride','Early Morning 20-mile','Weekend Ride','Mountain Road Group Ride'],
+  kayaking: ['Kayak Launch','Kayaking','Lake Kayaking','Group Kayak','Weekend Kayak'],
+  rafting: ['Rafting Guide','Whitewater Rafting Adventure','Whitewater Rafting','Level-5 Rafters'],
+  fishing: ['Fish Spot','Trout Fishing','River Access','Fly Fishing','Fishing','Find-a-Fish Event'],
+  birdWatching: ['Bird Watcher Anonymous','Bird Watchers Paradise','Bird Watching Club Meet','Bird Watching Spot'],
+}
+
 const recurring = ['no','daily','weekly','bi-weekly','monthly']
 
 /** @type {import('sequelize-cli').Migration} */
@@ -33,7 +46,7 @@ module.exports = {
         }
 
         return {
-          name: activity.name,
+          name: eventWordBank[activity.ref][Math.floor(Math.random() * eventWordBank[activity.ref].length)],
           userId: user.id,
           activityId: activity.id,
           date: falso.randFutureDate({years: .125}),
