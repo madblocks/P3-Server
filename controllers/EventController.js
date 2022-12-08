@@ -97,7 +97,7 @@ const UpdateEvent = async (req, res) => {
     const updatedEvent = await Event.update(
       req.body,
       {
-        where: { eventId: req.params.eventId},
+        where: {id: req.params.eventId},
         returning: true
       }
     )
