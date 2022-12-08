@@ -8,7 +8,7 @@ Router.get('/', controller.FindEvents)
 Router.get('/:eventId', controller.GetEventById)
 Router.post('/', controller.CreateEvent)
 Router.put('/:eventId', controller.UpdateEvent)
-Router.delete('/:eventdId', controller.DeleteEvent)
+Router.delete('/:eventId', controller.DeleteEvent)
 
 
 
