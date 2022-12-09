@@ -30,11 +30,11 @@ const CreateEventLikes = async (req, res) => {
 
 const DeleteEventLikes = async (req, res) => {
     try {
-        const DeleteEventLikes = await EventLikes.destroy({
+        await EventLikes.destroy({
             where: {id: req.params.id},
             trunicate: true
         })
-        res.send(DeleteEventLikes)
+        res.send(`Deleted Event Likes with ID: ${req.params.id}`)
     } catch (error) {
         throw error 
     }
