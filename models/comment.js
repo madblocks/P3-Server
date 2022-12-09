@@ -36,17 +36,19 @@ module.exports = (sequelize) => {
   });
   Comment.associate = function(models) {
     Comment.belongsTo(models.User, {
-      as: 'user'
+      as: 'user',
     })
 
     Comment.belongsTo(models.Event, {
-      as: 'event'
+      as: 'event',
     })
 
     Comment.belongsToMany(models.User, {
       through: models.CommentLikes,
       foreignKey: "commentId",
-      as: "commentsLiked"
+      as: "commentsLiked",
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
   }
   return Comment

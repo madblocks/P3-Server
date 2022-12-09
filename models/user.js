@@ -53,30 +53,40 @@ module.exports = (sequelize) => {
     //associations can be defined here
     User.hasMany(models.Comment, {
       foreignKey: "userId",
-      as: 'comments'
+      as: 'comments',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
 
     User.hasMany(models.Event, {
       foreignKey: "userId",
-      as: "events"
+      as: "events",
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
 
     User.belongsToMany(models.Event, {
       through: models.Attending,
       foreignKey: "userId",
-      as: "attendingEvents"
+      as: "attendingEvents",
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
     
     User.belongsToMany(models.Comment, {
       through: models.CommentLikes,
       foreignKey: "userId",
-      as: "likedComment"
+      as: "likedComment",
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
     
     User.belongsToMany(models.Event, {
       through: models.EventLikes,
       foreignKey: "userId",
-      as: "likedEvents"
+      as: "likedEvents",
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
   
   }

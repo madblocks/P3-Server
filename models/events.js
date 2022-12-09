@@ -64,28 +64,38 @@ module.exports = (sequelize) => {
 
     Event.hasMany(models.Comment, {
       foreignKey: "eventId",
-      as: 'comments'
+      as: 'comments',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     })
 
     Event.belongsTo(models.Activity, {
-      as: 'activity'
+      as: 'activity',
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
     })
 
     Event.belongsTo(models.User, {
       as: 'owner',
-      foreignKey: 'userId'
+      foreignKey: 'userId',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
 
     Event.belongsToMany(models.User, {
       through: models.Attending,
       foreignKey: "eventId",
-      as: "attendees"
+      as: "attendees",
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
 
     Event.belongsToMany(models.User, {
       through: models.EventLikes,
       foreignKey: "eventId",
-      as: "eventLikedBy"
+      as: "eventLikedBy",
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
     })
   }
   return Event
