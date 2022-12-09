@@ -110,11 +110,8 @@ const UpdateEvent = async (req, res) => {
 // url: /api/event/:eventId
 const DeleteEvent = async (req, res) => {
   try {
-    const deletedEvent = await Event.destroy({
-      where: {id: req.params.eventId},
-      trunicate: true
-    })
-    res.send(deletedEvent)
+    await Event.destroy({where: {id: req.params.eventId}})
+    res.send(`Deleted Event with ID: ${req.params.eventId}`)
   } catch (error) {
     throw error
   }

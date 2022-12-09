@@ -66,11 +66,11 @@ const UpdateComment = async (req, res) => {
 
 const DeleteComment = async (req, res) => {
   try {
-    const deletedComment = await Comment.destroy({
+    await Comment.destroy({
       where: {id: req.params.commentId},
       trunicate: true
     })
-    res.send(deletedComment)
+    res.send(`Deleted Comment with ID: ${req.params.commentId}`)
   } catch (error) {
     throw error
   }

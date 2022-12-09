@@ -32,11 +32,11 @@ const CreateCommentLikes = async (req, res) => {
 
 const DeleteCommentLikes = async(req, res) => {
     try {
-        const DeleteCommentLikes = await CommentLikes.destroy({
+        await CommentLikes.destroy({
             where: {id: req.params.id },
              trunicate: true 
         })
-        res.send(DeleteCommentLikes)
+        res.send(`Deleted Comment Likes ID: ${req.params.id}`)
     } catch (error) {
         throw error
     }

@@ -11,6 +11,7 @@ module.exports = {
       },
       commentId: {
         type: Sequelize.UUID,
+        onDelete: 'CASCADE',
         references: {
           model: 'comments',
           id: 'id'
@@ -18,6 +19,7 @@ module.exports = {
       },
       userId: {
         type: Sequelize.UUID,
+        onDelete: 'CASCADE',
         references: {
           model: 'users',
           id: 'id'

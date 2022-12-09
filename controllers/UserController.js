@@ -80,11 +80,11 @@ const UpdateUser = async (req, res) => {
 
 const DeleteUser = async (req, res) => {
   try {
-    const deletedUser = await User.destroy({
+    await User.destroy({
       where: {id: req.params.username},
       trunicate: true
     })
-    res.send(deletedUser)
+    res.send(`Deleted User: ${req.params.username}`)
   } catch (error) {
     throw error
   }
