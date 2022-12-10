@@ -13,7 +13,8 @@
     "user": "postgres",
     "password": "OKvwQOh8F0aPTWlXIQtn",
     "database": "railway",
-    "host": "containers-us-west-154.railway.app:6724",
-    "dialect": "postgres"
+    "host": "containers-us-west-154.railway.app",
+    "dialect": "postgres",
+    "port": "6724"
   }
 }
