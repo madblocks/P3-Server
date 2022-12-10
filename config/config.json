@@ -1,6 +1,8 @@
 {
   "development": {
-    "database": "outdoorsy_dev",
+    "user": "",
+    "password": "",
+    "database": "outdoorsy",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
