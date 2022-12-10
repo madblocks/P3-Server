@@ -10,7 +10,9 @@
     "dialect": "postgres"
   },
   "production": {
-    "database": "outdoorsy_production",
+    "user": "postgres",
+    "password": "OKvwQOh8F0aPTWlXIQtn",
+    "database": "railway",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
