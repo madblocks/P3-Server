@@ -13,7 +13,7 @@
     "user": "postgres",
     "password": "OKvwQOh8F0aPTWlXIQtn",
     "database": "railway",
-    "host": "127.0.0.1",
+    "host": "containers-us-west-154.railway.app:6724",
     "dialect": "postgres"
   }
 }
